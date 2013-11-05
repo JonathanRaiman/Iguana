@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<%= stylesheet_link_tag "/css/bootstrap.min.css", :media => "all" %>
+		<%= stylesheet_link_tag "/css/font-awesome.min.css", :media => "all"%>
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+
+		<title><%= 'Iguana' %></title>
+
+		<meta charset="utf-8" />	
+	</head>
+	<body>
+		<div class="container-fluid">
+			<%= yield %>
+		</div>
+	</body>
+	<%= javascript_script_tag "/js/jquery.min.js" %>
+	
+	<%= javascript_script_tag "/js/bootstrap.min.js" %>
+	<%= javascript_script_tag "/js/app.js" %>
+	
+</html>
