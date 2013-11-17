@@ -1,6 +1,6 @@
 Iguana
 ======
-*Linked Data Ventures Mini Project*
+*Linked Data Ventures Final Group Project*
 
 
 **collaborators**
