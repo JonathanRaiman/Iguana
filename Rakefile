@@ -11,3 +11,9 @@ task :less do
 	if !File.exists?("#{App.root}/public/css/") then Dir.mkdir "#{App.root}/public/css/" end
 	File.open("#{App.root}/public/css/style.css", 'w') {|f| f.write(css) }
 end
+
+desc 'Import Etsy seller data'
+task :etsy do
+	require './app'
+	App.obtain_etsy_data
+end

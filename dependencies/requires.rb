@@ -8,3 +8,6 @@
 	'../classes/mainController/routes',
 	'../classes/tabController/TabController'
 ].map {|d| require_relative(d)}
+
+class App;include(TabController);end
+class App;include(EtsyParser);end
