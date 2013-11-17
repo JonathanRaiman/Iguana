@@ -1,6 +1,9 @@
 # coding: utf-8
 config:
     sitename: Iguana
+    etsy:
+        key: "jzs8sdrx6a9c4qepmox2zjh0"
+        secret: "uvy09ldman"
     domain: www.iguana.com
     session_secret: zanzibar_499_devils
     tabs:
