@@ -2,7 +2,13 @@ source 'https://rubygems.org'
 
 gem 'sinatra'
 gem 'sinatra-static-assets'
+gem 'sinatra-contrib'
+gem 'sinatra-assetpack'
+gem 'sinatra-r18n'
+gem 'sinatra-synchrony'
+gem 'therubyracer'
 gem 'colorize'
+gem 'box_puts'
 gem 'json'
 gem 'sparql'
 gem 'rspec'
@@ -10,3 +16,4 @@ gem "capybara"
 gem 'thin'
 gem "rdf"
 gem "rdf-raptor"
+gem 'less'

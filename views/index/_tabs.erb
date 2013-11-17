@@ -1,0 +1,21 @@
+<div class="tabbable">
+	<div class="tab-content">
+		<% App.sections.each_with_index do |section,k| %>
+			<% section = section.last %>
+			<div class="tab-pane<%=k==0 ? ' active' : '' %> fade in" id="<%= section["title"].gsub(' ','_') %>_tab">
+				<div class="container container-gondola">
+					<div class="row">
+						<div class="col-m-12">
+							<h4>
+								<%= section["title"] %>
+							</h4>
+							<p>
+								<%= section["description"] %>
+							</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		<% end %>
+	</div>
+</div>

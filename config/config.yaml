@@ -1,0 +1,14 @@
+# coding: utf-8
+config:
+    sitename: Iguana
+    domain: www.iguana.com
+    session_secret: zanzibar_499_devils
+    tabs:
+        price_comparisions:
+            title: Prices
+            description: "Compare prices for different product categories to improve your sales and price alignment."
+        linked_data:
+            title: Technology
+            description: |
+              We use <b>Linked Data</b> to promote data open-ness and ease-of-access and extensibility. Furthermore we are interested
+              in seeing mashups of pricing data with other datasets to detect other kinds of correlations.
