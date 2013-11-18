@@ -5,7 +5,7 @@ Iguana
 
 **collaborators**
 *    Michael Phox,
-*    Mitchell Kates,
+*    Mitch Kates,
 *    Jonathan Raiman
 
 
