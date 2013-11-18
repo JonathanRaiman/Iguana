@@ -6215,3 +6215,6 @@ li > small {
   color: #999999;
 }
 /* them / coloring variables go here */
+body {
+  background-image: url("../img/contentbg.jpg");
+}

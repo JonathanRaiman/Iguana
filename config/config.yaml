@@ -8,8 +8,8 @@ config:
     session_secret: zanzibar_499_devils
     tabs:
         price_comparisions:
-            title: Prices
-            description: "Compare prices for different product categories to improve your sales and price alignment."
+            title: P
+            description: ""
         linked_data:
             title: Technology
             description: |
