@@ -17,3 +17,6 @@ gem 'thin'
 gem "rdf"
 gem "rdf-raptor"
 gem 'less'
+gem 'omniauth'
+gem 'omniauth-etsy'
+gem 'warden'

@@ -1,6 +1,3 @@
-require 'sinatra/base'
-require 'sinatra/static_assets'
-
 class App < Sinatra::Base
 	SITENAME = "Iguana"
 	register Sinatra::StaticAssets

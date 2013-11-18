@@ -8,6 +8,11 @@ class App < Sinatra::Base
 	register Sinatra::AssetPack
 	set :root, File.expand_path('../', File.dirname(__FILE__))
 	R18n::I18n.default = 'en' # default language
-	URLS = {main: "/"}
+	URLS = {
+		:main                 => "/",
+		:auth                 => "/auth/:provider/callback",
+		:logout               => "/logout",
+		:auth_failure         => "/auth/failure"
+	}
 	before {session[:locale]||= "en"}
 end
