@@ -17,6 +17,7 @@ gem 'thin'
 gem "rdf"
 gem "rdf-raptor"
 gem 'less'
+gem 'mongo_mapper'
 gem 'omniauth'
 gem 'omniauth-etsy'
 gem 'warden'

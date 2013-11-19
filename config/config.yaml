@@ -7,6 +7,9 @@ config:
     domain: www.iguana.com
     session_secret: zanzibar_499_devils
     tabs:
+        special_tab:
+            title: "Special Tab"
+            description: "My special tab"
         price_comparisions:
             title: Prices
             description: "Compare prices for different product categories to improve your sales and price alignment."

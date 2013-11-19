@@ -15,4 +15,12 @@ class App < Sinatra::Base
 		:auth_failure         => "/auth/failure"
 	}
 	before {session[:locale]||= "en"}
+
+	CONFIG = YAML.load_file(File.expand_path('../config/config.yaml', File.dirname(__FILE__)))["config"]
+	SITENAME = CONFIG["sitename"]
+	use Rack::Session::Cookie, :expire_after => 31536000, :secret => CONFIG["session_secret"]
+	use OmniAuth::Builder do
+		provider :etsy, CONFIG["etsy"]["key"], CONFIG["etsy"]["secret"], :scope => 'email_r,profile_r,listings_r'
+	end
+
 end

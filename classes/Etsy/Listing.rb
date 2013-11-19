@@ -9,7 +9,6 @@ class Listing
 	key :description, String
 	key :creation_tsz, Float
 	key :ending_tsz, Float
-	key :original_creation_tsz, Float
 	key :last_modified_tsz, Float
 	key :price, String
 	key :currency_code, String
@@ -17,7 +16,7 @@ class Listing
 	key :tags, Array
 	key :category_path, Array
 	key :category_path_ids, Array
-	key :matrials, Array
+	key :materials, Array
 	key :url, String
 	key :views, Integer
 	key :num_favorers, Integer
@@ -53,4 +52,43 @@ class Listing
 	key :style, Array
 	key :is_digital, Boolean, :default => false
 	key :has_variations, Boolean, :default => false
+end
+
+class Etsy::Listing
+
+	attributes :when_made, :processing_min, :processing_max,
+	:who_made, :category_path, :category_path_ids, :is_supply,
+	:category_id
+
+
+	def save
+		Listing.new(
+			:listing_id => id,
+			:views => view_count,
+			:state => state,
+			:currency_code => currency,
+			:ending_tsz => ending,
+			:last_modified_tsz => modified,
+			:creation_tsz => created,
+			:title => title,
+			:tags => tags,
+			:materials => materials,
+			:url => url,
+			:who_made => who_made,
+			:processing_min => processing_min,
+			:processing_max => processing_max,
+			:num_favorers => num_favorers,
+			:category_path => category_path,
+			:category_path_ids => category_path_ids,
+			:is_supply => is_supply,
+			:when_made => when_made,
+			:state => state,
+			:user_id => user_id,
+			:category_id => category_id,
+			:price => price,
+			:description => description,
+			:quantity => quantity
+		)
+	end
+
 end

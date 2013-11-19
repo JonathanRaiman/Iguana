@@ -4,9 +4,9 @@
 
 # then load some classes:
 [
+	'../classes/sinatra',
 	'../classes/Etsy/Etsy',
 	'../classes/etsyParser/EtsyParser',
-	'../classes/sinatra',
 	'../classes/authController/authController',
 	'../classes/authController/warden',
 	'../classes/mainController/routes',

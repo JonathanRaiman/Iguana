@@ -15,5 +15,5 @@ end
 desc 'Import Etsy seller data'
 task :etsy do
 	require './app'
-	App.obtain_etsy_data
+	App.obtain_etsy_data :limit => 10000
 end
