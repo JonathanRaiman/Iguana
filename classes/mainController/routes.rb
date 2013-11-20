@@ -8,15 +8,15 @@ class App < Sinatra::Base
 			category: "Jewelry",
 			series: [
 				{
-					type: "price"
+					type: "price",
 					data: [2,4.2, 9.3, 15, 45, 20, 9, 2, 0.5, 0]
 				},
 				{
-					type: "views"
+					type: "views",
 					data: [2,4.2, 9.3, 15, 45, 20, 9, 2, 0.5, 0]
 				},
 				{
-					type: "gross"
+					type: "gross",
 					data: [2,4.2, 9.3, 15, 45, 20, 9, 2, 0.5, 0]
 				}
 			]
