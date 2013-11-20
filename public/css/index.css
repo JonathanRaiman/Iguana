@@ -1,5 +1,4 @@
 a:hover, a:focus {
-	color: #fff;
 	text-decoration: none;
 }
 .footer {
@@ -11,7 +10,7 @@ a:hover, a:focus {
 }
 .page-header {
 	text-align: center;
-	margin: 20px 80px;
+	margin: 20px 0px;
 	padding-bottom: 40px;
 	border-bottom:1px solid #f4f4f4;
 }
@@ -30,8 +29,8 @@ a:hover, a:focus {
 	text-align: center;
 	margin-bottom: 20px;
 }
-.button-container span {
-	margin: 0 10px;
+.button-container a {
+	margin: 5px 10px;
 }
 .button-container a {
 	display:inline-block;
