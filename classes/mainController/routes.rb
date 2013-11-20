@@ -3,15 +3,14 @@ class App < Sinatra::Base
 		erb :"index/_index"
 	end
 
-	get URLS[:data] do
-		types = params[:types].split(",").map {|i| i.to_sym}
-		hists = App.histogram_for(:category => params[:category], :boxes => params[:boxes] ? params[:boxes].to_i : 10, :types => types)
+	post URLS[:data] do
+		hists = App.histogram_for(:category => params[:category], :boxes => params[:boxes] ? params[:boxes].to_i : 10, :types => params[:types])
 		resp = {
 			category: params[:category],
 			series: {}
 		}
-		types.each do |type|
-			resp[:series][type] = {
+		params[:types].each do |type|
+			resp[:series][type[:name].to_sym] = {
 				type: type,
 				data: hists[type].histogram,
 				fork_size: hists[type].fork_size,
