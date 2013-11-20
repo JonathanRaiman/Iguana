@@ -5,21 +5,56 @@ class App < Sinatra::Base
 
 	get URLS[:data] do
 		{
-			category: "Jewelry",
-			series: [
-				{
-					type: "price",
-					data: [2,4.2, 9.3, 15, 45, 20, 9, 2, 0.5, 0]
+			categories:["jewelery","children","painting","pets","hats"],
+
+			jewelery: {
+				price: {
+					listing_size: 100,
+					average: 100,
+					standard_dev: 100,
+					histograms: {
+						ten_bin:{
+							values: [1,2,3,4,5,6,7,8,9,10],
+							bin_width: 4
+						},
+						twentyfive_bin:{
+							values: [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25],
+							bin_width: 4
+						},
+						fifty_bin:{
+							values: [1,2,3,4,5,6,7,8,9,0],
+							bin_width: 4
+						},
+						onehundred_bin:{
+							values: [1,2,3,4,5,6,7,8,9,0],
+							bin_width: 4							
+						}
+					}
 				},
-				{
-					type: "views",
-					data: [2,4.2, 9.3, 15, 45, 20, 9, 2, 0.5, 0]
-				},
-				{
-					type: "gross",
-					data: [2,4.2, 9.3, 15, 45, 20, 9, 2, 0.5, 0]
+				views: {
+					view_count: 100,
+					average: 100,
+					standard_dev: 100,
+					histograms: {
+						ten_bin:{
+							values: [1,2,3,4,5,6,7,8,9,10],
+							bin_width: 4
+						},
+						twentyfive_bin:{
+							values: [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25],
+							bin_width: 4
+						},
+						fifty_bin:{
+							values: [1,2,3,4,5,6,7,8,9,0],
+							bin_width: 4
+						},
+						onehundred_bin:{
+							values: [1,2,3,4,5,6,7,8,9,0],
+							bin_width: 4							
+						}
+					}
 				}
-			]
+			}
 		}.to_json
 	end
 end
