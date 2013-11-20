@@ -9,9 +9,18 @@ Iguana
 *    Jonathan Raiman
 
 
+
+
 Installation
 ------------
 
+0. ** install MongoDB **
+	
+	Recommended to do the following:
+	
+			brew install mongodb
+
+	Then get cracking:
 
 1.    Run
 
