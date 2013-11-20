@@ -8,10 +8,10 @@ class App < Sinatra::Base
 		hists = App.histogram_for(:category => params[:category], :boxes => params[:boxes] ? params[:boxes].to_i : 10, :types => types)
 		resp = {
 			category: params[:category],
-			series: []
+			series: {}
 		}
 		types.each do |type|
-			resp[:series] << {
+			resp[:series][type] = {
 				type: type,
 				data: hists[type].histogram,
 				fork_size: hists[type].fork_size,
