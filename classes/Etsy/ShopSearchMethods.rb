@@ -10,6 +10,12 @@ module ShopSearchMethods
 			end
 			nil
 		end
+
+		def find_all_users_for_category category
+			Shop.where(:"listings.category_path" => category).fields(:user_id).find_each do |shop|
+				yield(User.first(:user_id => shop.user_id),shop)
+			end
+		end
 	end
 
 end
