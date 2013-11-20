@@ -1,5 +1,5 @@
 <% if !env['warden'].user %>
-	<li><a href="/auth/etsy"><%= t.login %></a></li>
+	<a href="/auth/etsy" class="button button-pill button-flat"><%= t.login %></a>
 <% else %>
-	<li><a href="/logout"><%= t.logout %></a></li>
+	<a href="/logout" class="button button-action"><%= t.logout %></a>
 <% end %>

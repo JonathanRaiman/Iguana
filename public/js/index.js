@@ -1,7 +1,25 @@
-$(function () {
-        $('#graphone').highcharts({
+var active = "";
+
+//Button functionality to toggle the colors
+$(document).ready(function() {
+	updateGraphs();
+	$(".button-container a").click(function() {
+		if ($(this).text() != active) {
+			$.each($('.button-container a'),function(index,handle) {
+				$(handle).removeClass($(handle).attr('data-class'));
+			});
+			$(this).addClass($(this).attr('data-class'));
+			active = $(this).text();
+			updateGraphs();
+		}
+	});
+});
+
+var updateGraphs = function updateGraphs() {
+	//Make JSON Calls
+	$('#graphone').highcharts({
             title: {
-                text: '',
+                text: 'Cool dude',
                 x: -20 //center
             },
             xAxis: {
@@ -41,7 +59,7 @@ $(function () {
                 data: [3.9, 4.2, 5.7, 8.5, 11.9, 15.2, 17.0, 16.6, 14.2, 10.3, 6.6, 4.8]
             }]
         });
-         $('#graphtwo').highcharts({
+        $('#graphtwo').highcharts({
 			 chart: {
                 type: 'bar'
             },
@@ -138,5 +156,4 @@ $(function () {
                 data: [3.9, 4.2, 5.7, 8.5, 11.9, 15.2, 17.0, 16.6, 14.2, 10.3, 6.6, 4.8]
             }]
         });
-    });
-    
+};
