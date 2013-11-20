@@ -4,22 +4,21 @@ class App < Sinatra::Base
 	end
 
 	get URLS[:data] do
-		{
-			category: "Jewelry",
-			series: [
-				{
-					type: "price",
-					data: [2,4.2, 9.3, 15, 45, 20, 9, 2, 0.5, 0]
-				},
-				{
-					type: "views",
-					data: [2,4.2, 9.3, 15, 45, 20, 9, 2, 0.5, 0]
-				},
-				{
-					type: "gross",
-					data: [2,4.2, 9.3, 15, 45, 20, 9, 2, 0.5, 0]
-				}
-			]
-		}.to_json
+		types = params[:types].split(",").map {|i| i.to_sym}
+		hists = App.histogram_for(:category => params[:category], :boxes => params[:boxes] ? params[:boxes].to_i : 10, :types => types)
+		resp = {
+			category: params[:category],
+			series: []
+		}
+		types.each do |type|
+			resp[:series] << {
+				type: type,
+				data: hists[type].histogram,
+				fork_size: hists[type].fork_size,
+				min_value: hists[type].min_value,
+				max_value: hists[type].max_value
+			}
+		end
+		resp.to_json
 	end
 end
