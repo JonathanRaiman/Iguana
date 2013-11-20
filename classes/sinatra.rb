@@ -12,7 +12,8 @@ class App < Sinatra::Base
 		:main                 => "/",
 		:auth                 => "/auth/:provider/callback",
 		:logout               => "/logout",
-		:auth_failure         => "/auth/failure"
+		:auth_failure         => "/auth/failure",
+		:data                 => "/data.json"
 	}
 	before {session[:locale]||= "en"}
 
