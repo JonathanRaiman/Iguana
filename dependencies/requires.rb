@@ -15,3 +15,4 @@
 
 class App;include(TabController);end
 class App;include(EtsyParser);end
+class Shop;include(ShopSearchMethods);end
