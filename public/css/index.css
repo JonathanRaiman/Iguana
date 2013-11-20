@@ -1,0 +1,55 @@
+a:hover, a:focus {
+	color: #fff;
+	text-decoration: none;
+}
+.footer {
+	text-align: center;
+	color: #999;
+	font-size: 13px;
+	padding: 30px 0 0 0;
+	text-shadow: 0 0 1px #fff;
+}
+.page-header {
+	text-align: center;
+	margin: 20px 80px;
+	padding-bottom: 40px;
+	border-bottom:1px solid #f4f4f4;
+}
+.page-header h1 {
+	font-size: 70px;
+	color: #fff;
+	text-shadow: 0 0 3px #444;
+}
+.page-header h2 {
+	color: #888;
+	font-size: 20px;
+	text-shadow: 0 0 2px #fff;
+	font-weight: 200;
+}
+.button-container {
+	text-align: center;
+	margin-bottom: 20px;
+}
+.button-container span {
+	margin: 0 10px;
+}
+.button-container a {
+	display:inline-block;
+}
+.graph-row {
+	width: 90%;
+	margin: 10px auto;
+}
+.graph-row h3 {
+	font-weight: 200;
+	color: #777;
+	font-size: 18px;
+	text-shadow: 0 0 1px #fff;
+}
+.graphcontainer {
+	border:1px solid #ccc;
+	box-shadow: 0 0 3px #aaa;
+	border-radius: 6px;
+}
+#graphone {
+}

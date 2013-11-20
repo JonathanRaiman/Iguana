@@ -13,10 +13,12 @@
 				</div>
 				<div class="navbar-collapse collapse">
 					<ul class="nav navbar-nav">
+					<% if false %>
 						<% App.sections.each_with_index do |section,k| %>
 							<li class="<%=k==0 ? 'active ' : '' %>marketing_toggle_button">
 								<a href="#<%= section.last["title"].gsub(' ','_') %>_tab" data-toggle="tab"><%= section.last["title"] %></a>
 							</li>
+						<% end %>
 						<% end %>
 					</ul>
 					<ul class="nav navbar-nav navbar-right">
