@@ -2,49 +2,15 @@
 	<div class="page-header">
 		<h1>Iguana</h1>
 		<h2>The most advanced Etsy Analytics Platform</h2>
+		<%= erb :"index/_login_button" %>
 	</div>
 
 	<div class="button-container">
-		<span class="button-dropdown button-wrap" data-buttons="dropdown">
-			<a href="#" class="button button-rounded button-primary button-pill">Category<i class="icon-caret-down"></i></a>
-			<ul class="button-dropdown-menu-below">
-			<li><a href="#">Handmade Goods</a></li>
-			<li><a href="#">Vintage Items</a></li>
-			<li><a href="http://google.com">Craft Supplies</a></li>
-			</ul>
-		</span>
-		<span class="button-dropdown button-wrap" data-buttons="dropdown">
-			<a href="#" class="button button-rounded button-royal button-pill">Price<i class="icon-caret-down"></i></a>
-			<ul class="button-dropdown-menu-below">
-			<li><a href="#">Handmade Goods</a></li>
-			<li><a href="#">Vintage Items</a></li>
-			<li><a href="http://google.com">Craft Supplies</a></li>
-			</ul>
-		</span>
-		<span class="button-dropdown button-wrap" data-buttons="dropdown">
-			<a href="#" class="button button-rounded button-caution button-pill">Location<i class="icon-caret-down"></i></a>
-			<ul class="button-dropdown-menu-below">
-			<li><a href="#">Handmade Goods</a></li>
-			<li><a href="#">Vintage Items</a></li>
-			<li><a href="http://google.com">Craft Supplies</a></li>
-			</ul>
-		</span>
-		<span class="button-dropdown button-wrap" data-buttons="dropdown">
-			<a href="#" class="button button-rounded button-highlight button-pill">Type<i class="icon-caret-down"></i></a>
-			<ul class="button-dropdown-menu-below">
-			<li><a href="#">Handmade Goods</a></li>
-			<li><a href="#">Vintage Items</a></li>
-			<li><a href="http://google.com">Craft Supplies</a></li>
-			</ul>
-		</span>
-		<span class="button-dropdown button-wrap" data-buttons="dropdown">
-			<a href="#" class="button button-rounded button-action button-pill">Category<i class="icon-caret-down"></i></a>
-			<ul class="button-dropdown-menu-below">
-			<li><a href="#">Handmade Goods</a></li>
-			<li><a href="#">Vintage Items</a></li>
-			<li><a href="http://google.com">Craft Supplies</a></li>
-			</ul>
-		</span>
+		<a href="#" data-class="button-caution" class="button button-rounded button-caution button-pill">Art</a>
+		<a href="#" data-class="button-royal" class="button button-rounded button-royal button-pill">Home & Living</a>
+		<a href="#" data-class="button-primary" class="button button-rounded button-primary button-pill">Jewelry</a>
+		<a href="#" data-class="button-highlight" class="button button-rounded button-highlight button-pill">Women</a>
+		<a href="#" data-class="button-action" class="button button-rounded button-action button-pill">Vintage</a>
 	</div>
 
 	<div class="row graph-row">
