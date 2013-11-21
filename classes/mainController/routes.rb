@@ -4,7 +4,7 @@ class App < Sinatra::Base
 	end
 
 	post URLS[:data] do
-		hists = App.histogram_for(:category => params[:category], :boxes => params[:boxes] ? params[:boxes].to_i : 10, :types => params[:types])
+		hists = App.histogram_for(:category => params[:category], :boxes => params[:boxes] ? params[:boxes].to_i : 10, :types => JSON.parse(params[:types]))
 		resp = {
 			category: params[:category],
 			series: {}
