@@ -11,7 +11,8 @@ if ENV['MONGOHQ_URL']
 	host = db.host
 	port = db.port
 end
-MongoMapper.connection = Mongo::Connection.new(host,port, :pool_size => 10, :pool_timeout => 30)
-MongoMapper.connection.authenticate(db.user, db.password) if db and !db.user.nil? and !db.password.nil?
+db_connection = Mongo::Connection.new(host,port, :pool_size => 10, :pool_timeout => 30)
+db_connection.authenticate(db.user, db.password) if (db and !db.user.nil? and !db.password.nil?)
+MongoMapper.connection = db_connection
 
 %w(Listing Shop User configuration ShopSearchMethods).map {|d| require_relative(d)}
