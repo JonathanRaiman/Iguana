@@ -1,17 +1,17 @@
-var active = "jewelery";
+var active = "";
 
 //****************************************
 //Button functionality to toggle the colors
 //****************************************
 $(document).ready(function() {
-	updateGraphs();
+	//updateGraphs();
 	$(".button-container a").click(function() {
 		if ($(this).text() != active) {
 			$.each($('.button-container a'),function(index,handle) {
 				$(handle).removeClass($(handle).attr('data-class'));
 			});
 			$(this).addClass($(this).attr('data-class'));
-			active = $(this).text().toLowerCase();
+			active = $(this).text();
 			updateGraphs();
 		}
 	});
@@ -21,18 +21,24 @@ var updateGraphs = function updateGraphs() {
 	$.ajax({
 		dataType: "json",
 		url: "/data.json",
-		data: {'boxes':25,'types':'views,price','category':active},
+		type:"POST",
+		data: {
+			'boxes':15,
+			'types':JSON.stringify([
+				{name: 'views', min_value: 0, max_value: 200},
+				{name: 'price', min_value: 0, max_value: 500}
+			]),
+			category:active
+		},
 		success: function(response) {
-			var resp = response[active];
-			
+			var resp = response['series'];
 			var price = resp['price'];
-			var price_histogram = price['histograms']['twentyfive_bin'];
-			var price_histogram_values = price_histogram['values'];
-			var bins = generateBins(price_histogram['bin_width'],25);
+			var price_histogram = price['data'];
+			var bins = generateBins(price['fork_size'],price_histogram.length);
 			
 			var views = resp['views'];
-			var views_histogram = views['histograms']['twentyfive_bin'];
-			var views_histogram_values = views_histogram['values'];
+			var views_histogram = views['data'];
+			var bins = generateBins(views['fork_size'],views_histogram.length);
 
 			$('#graphone').highcharts({
 				chart: {type: 'column'},
@@ -67,7 +73,7 @@ var updateGraphs = function updateGraphs() {
 				},
 				series: [{
 					name: '',
-					data: price_histogram_values
+					data: price_histogram
 				}]
 			});
 			$('#graphthree').highcharts({
@@ -103,7 +109,7 @@ var updateGraphs = function updateGraphs() {
 				},
 				series: [{
 					name: '',
-					data: views_histogram_values
+					data:views_histogram
 				}]
 			});
 		}
@@ -114,7 +120,7 @@ var updateGraphs = function updateGraphs() {
 var generateBins = function generateBins(width,number) {
 	list = [];
 	for (i = 0; i < width*number; i = i+width) {
-		list.push(i)
+		list.push(parseInt(i))
 	}
 	return list;
 };
