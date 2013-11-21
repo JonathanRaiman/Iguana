@@ -6,10 +6,14 @@ module EtsyParser
 	module ClassMethods
 
 		def obtain_etsy_data(opts={})
-			shops = opts[:shops] || Etsy::Shop.all(:limit => opts[:limit])
+			puts opts
+			shops = opts[:shops] || Etsy::Shop.all(opts)
+			current, total = 0, shops.length
 			shops.each do |shop|
 				shop.user.save
 				shop.save
+				current += 1
+				JRProgressBar.show(current,total)
 			end
 		end
 

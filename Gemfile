@@ -11,8 +11,8 @@ gem 'colorize'
 gem 'box_puts'
 gem 'json'
 gem 'sparql'
-gem 'rspec'
-gem "capybara"
+gem 'rspec', :group => :development
+gem "capybara", :group => :development
 gem 'thin'
 gem "rdf"
 gem "rdf-raptor"
@@ -21,4 +21,5 @@ gem 'mongo_mapper'
 gem 'omniauth'
 gem 'omniauth-etsy'
 gem 'warden'
-gem 'esty'
+gem 'etsy'
+gem 'jraiman_progressbar'

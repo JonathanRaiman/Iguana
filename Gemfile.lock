@@ -1,9 +1,17 @@
 GEM
   remote: https://rubygems.org/
   specs:
+    activesupport (4.0.1)
+      i18n (~> 0.6, >= 0.6.4)
+      minitest (~> 4.2)
+      multi_json (~> 1.3)
+      thread_safe (~> 0.1)
+      tzinfo (~> 0.3.37)
     addressable (2.3.5)
+    atomic (1.1.14)
     backports (3.3.5)
     box_puts (1.0.0)
+    bson (1.9.2)
     builder (3.2.2)
     capybara (2.1.0)
       mime-types (>= 1.16)
@@ -30,10 +38,17 @@ GEM
       eventmachine (>= 1.0.0.beta.4)
     em-synchrony (1.0.3)
       eventmachine (>= 1.0.0.beta.1)
+    etsy (0.2.5)
+      json (>= 1.5.0)
+      oauth (~> 0.4.0)
     eventmachine (1.0.3)
     ffi (1.9.0)
     hashie (2.0.5)
     http_parser.rb (0.6.0.beta.2)
+    i18n (0.6.5)
+    jnunemaker-validatable (1.8.4)
+      activesupport (>= 2.3.4)
+    jraiman_progressbar (1.0.1)
     jsmin (1.0.1)
     json (1.8.1)
     json_pure (1.8.1)
@@ -42,6 +57,13 @@ GEM
     libv8 (3.11.8.17)
     mime-types (2.0)
     mini_portile (0.5.2)
+    minitest (4.7.5)
+    mongo (1.9.2)
+      bson (~> 1.9.2)
+    mongo_mapper (0.8.6)
+      activesupport (>= 2.3.4)
+      jnunemaker-validatable (~> 1.8.4)
+      plucky (~> 0.3.6)
     multi_json (1.8.2)
     net-http-persistent (2.9)
     nokogiri (1.6.0)
@@ -57,6 +79,8 @@ GEM
     omniauth-oauth (1.0.1)
       oauth
       omniauth (~> 1.0)
+    plucky (0.3.8)
+      mongo (~> 1.3)
     r18n-core (1.1.7)
     rack (1.5.2)
     rack-fiber_pool (0.9.3)
@@ -133,7 +157,10 @@ GEM
       daemons (>= 1.0.9)
       eventmachine (>= 1.0.0)
       rack (>= 1.5.0)
+    thread_safe (0.1.3)
+      atomic
     tilt (1.4.1)
+    tzinfo (0.3.38)
     warden (1.2.3)
       rack (>= 1.0)
     xpath (2.0.0)
@@ -146,8 +173,11 @@ DEPENDENCIES
   box_puts
   capybara
   colorize
+  etsy
+  jraiman_progressbar
   json
   less
+  mongo_mapper
   omniauth
   omniauth-etsy
   rdf

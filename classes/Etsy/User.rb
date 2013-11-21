@@ -19,9 +19,8 @@ class User
 	key :oauth_token_secret,                          String
 	key :authenticated,								  Boolean, :default => false
 
-	ensure_index [[:location, '2d']]
+	# ensure_index [[:location, '2d']]
 	ensure_index [[:user_id, 1]], :unique => true
-	ensure_index [[:shop_id, 1]]
 
 	def self.create_using_auth o
 		User.create(
