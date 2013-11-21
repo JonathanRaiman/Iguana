@@ -12,6 +12,8 @@ GEM
     backports (3.3.5)
     box_puts (1.0.0)
     bson (1.9.2)
+    bson_ext (1.9.2)
+      bson (~> 1.9.2)
     builder (3.2.2)
     capybara (2.1.0)
       mime-types (>= 1.16)
@@ -171,6 +173,7 @@ PLATFORMS
 
 DEPENDENCIES
   box_puts
+  bson_ext
   capybara
   colorize
   etsy
