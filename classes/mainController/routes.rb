@@ -13,10 +13,10 @@ class App < Sinatra::Base
 		types.each do |type|
 			resp[:series][type["name"].to_sym] = {
 				type: type["name"],
-				data: hists[type["name"]].histogram,
-				fork_size: hists[type["name"]].fork_size,
-				min_value: hists[type["name"]].min_value,
-				max_value: hists[type["name"]].max_value
+				data: hists[type["name"].to_sym].histogram,
+				fork_size: hists[type["name"].to_sym].fork_size,
+				min_value: hists[type["name"].to_sym].min_value,
+				max_value: hists[type["name"].to_sym].max_value
 			}
 		end
 		resp.to_json
