@@ -180,6 +180,7 @@ DEPENDENCIES
   jraiman_progressbar
   json
   less
+  libv8
   mongo_mapper
   omniauth
   omniauth-etsy
