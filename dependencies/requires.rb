@@ -5,6 +5,8 @@
 # then load some classes:
 [
 	'../classes/sinatra',
+	'../classes/databaseController/Mongodb',
+	'../classes/databaseController/DatabaseConfiguration',
 	'../classes/Etsy/Etsy',
 	'../classes/etsyParser/EtsyParser',
 	'../classes/authController/authController',
