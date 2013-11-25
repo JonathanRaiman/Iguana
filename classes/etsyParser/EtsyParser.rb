@@ -1,6 +1,7 @@
 require_relative 'Histogram'
 
 module EtsyParser
+	SLEEP_TIME = 0.1
 	def self.included(base); base.extend(ClassMethods);	end
 
 	module ClassMethods
@@ -8,10 +9,17 @@ module EtsyParser
 		def obtain_etsy_data(opts={})
 			shops = opts[:shops] || Etsy::Shop.all(opts)
 			current, total = 0, shops.length
-			shops.each do |shop|
+			queries_in_last_second = 0
+			last_query_time        = 
+			shops.aech do |shop|
+				t1 = Time.now
 				if shop.user
 					shop.user.save
 					shop.save
+				end
+				diff = Time.now-t1
+				if diff < EtsyParser::SLEEP_TIME
+					sleep (EtsyParser::SLEEP_TIME-diff)
 				end
 				current += 1
 				JRProgressBar.show(current,total)

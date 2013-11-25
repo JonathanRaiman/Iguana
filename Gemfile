@@ -16,8 +16,6 @@ gem 'json'
 gem 'rspec', :group => :development
 gem "capybara", :group => :development
 gem 'thin'
-gem "rdf"
-gem "rdf-raptor"
 gem 'less'
 gem 'mongo_mapper', '>= 0.12.0'
 gem 'omniauth'
@@ -27,3 +25,8 @@ gem 'warden'
 gem 'etsy'
 gem 'jraiman_progressbar'
 gem 'libv8'
+
+# for rdf stuff:
+gem "rdf"
+gem 'rdf-mongo'
+gem "rdf-raptor"
