@@ -13,7 +13,7 @@ task :less do
 end
 
 desc 'Import Etsy seller data'
-task :etsy, :offset do |t, args|
+task :etsy, :offset, :limit do |t, args|
 	require './app'
-	App.obtain_etsy_data :limit => 1000, :offset => args[:offset].to_i
+	App.obtain_etsy_data :limit => args[:limit].to_i, :offset => args[:offset].to_i
 end
