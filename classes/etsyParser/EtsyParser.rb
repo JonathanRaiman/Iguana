@@ -6,7 +6,6 @@ module EtsyParser
 	module ClassMethods
 
 		def obtain_etsy_data(opts={})
-			puts opts
 			shops = opts[:shops] || Etsy::Shop.all(opts)
 			current, total = 0, shops.length
 			shops.each do |shop|

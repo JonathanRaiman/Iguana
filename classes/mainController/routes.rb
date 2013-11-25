@@ -21,4 +21,15 @@ class App < Sinatra::Base
 		end
 		resp.to_json
 	end
+
+	get '/all_listings' do
+		output = ""
+		index = 0
+		Shop.find_all_listings do |listing|
+			output += (listing.price+"\n")
+			index +=1 
+			if index > 100 then break end
+		end
+		output
+	end
 end
