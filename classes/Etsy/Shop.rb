@@ -16,7 +16,7 @@ class Shop
 	key :image_url, String
 	many :listings,	:class => Listing
 
-	ensure_index [[:shop_id, 1]], :unique => true
+	ensure_index [[:shop_id, 1]], :unique => true, :dropDups => true
 
 end
 
