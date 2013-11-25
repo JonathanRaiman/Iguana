@@ -9,7 +9,7 @@ module EtsyParser
 			shops = opts[:shops] || Etsy::Shop.all(opts)
 			current, total = 0, shops.length
 			shops.each do |shop|
-				shop.user.save
+				shop.user && shop.user.save
 				shop.save
 				current += 1
 				JRProgressBar.show(current,total)
