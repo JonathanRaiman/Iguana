@@ -74,27 +74,33 @@ class Etsy::User
 		self
 	end
 
+
+
 	# Saves an Etsy::User to a MongoDB collection
 	# @return [User] the Etsy user.
 	def save
-		user_profile = self.profile
-		User.create(
-			:user_id => id,
-			:login_name => username,
-			:email => email,
-			:join_tsz => created,
-			:transaction_buy_count => user_profile.transaction_buy_count,
-			:transaction_sold_count => user_profile.transaction_sold_count,
-			:is_seller => user_profile.is_seller,
-			:location => user_profile.lon ? [user_profile.lon, user_profile.lat] : nil,
-			:image_url => user_profile.image,
-			:country_id => user_profile.country_id,
-			:gender => user_profile.gender,
-			:oauth_token => nil,
-			:oauth_token_secret => nil,
-			:authenticated => false,
-			:shop_id => @shop_id
-		)
+		begin
+			user_profile = self.profile
+			User.create(
+				:user_id => id,
+				:login_name => username,
+				:email => email,
+				:join_tsz => created,
+				:transaction_buy_count => user_profile.transaction_buy_count,
+				:transaction_sold_count => user_profile.transaction_sold_count,
+				:is_seller => user_profile.is_seller,
+				:location => user_profile.lon ? [user_profile.lon, user_profile.lat] : nil,
+				:image_url => user_profile.image,
+				:country_id => user_profile.country_id,
+				:gender => user_profile.gender,
+				:oauth_token => nil,
+				:oauth_token_secret => nil,
+				:authenticated => false,
+				:shop_id => @shop_id
+			)
+		rescue NoMethodError
+			puts "associated_profile bug"
+		end
 	end
 
 end
