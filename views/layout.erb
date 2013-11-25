@@ -3,8 +3,9 @@
 	<head>
 		<%= stylesheet_link_tag "/css/style.css", :media => "all" %>
 		<%= stylesheet_link_tag "/css/font-awesome.min.css", :media => "all" %>
-		<%= stylesheet_link_tag "/css/index.css", :media => "all" %>
 		<%= stylesheet_link_tag "/css/buttons.css", :media => "all" %>
+		<%= stylesheet_link_tag "/css/jquery.jqplot.css", :media => "all" %>
+		<%= stylesheet_link_tag "/css/index.css", :media => "all" %>
 		<meta charset=utf-8 />
 		<title><%= @title ? @title : SITENAME %></title>
 		<meta charset="utf-8" />
@@ -15,6 +16,7 @@
 		<%= javascript_script_tag "js/bootstrap.min.js" %>
 		<%= javascript_script_tag "/js/buttons.js" %>
 		<%= javascript_script_tag "/js/highcharts.js" %>
+		<%= javascript_script_tag "/js/jquery.jqplot.min.js" %>
 		<%= javascript_script_tag "/js/app.js" %>
 		<%= javascript_script_tag "/js/index.js" %>
 	</body>
