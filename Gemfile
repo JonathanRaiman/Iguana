@@ -1,5 +1,7 @@
 source 'https://rubygems.org'
 
+ruby "1.9.3"
+
 gem 'sinatra'
 gem 'sinatra-static-assets'
 gem 'sinatra-contrib'
@@ -10,14 +12,14 @@ gem 'therubyracer'
 gem 'colorize'
 gem 'box_puts'
 gem 'json'
-gem 'sparql'
+# gem 'sparql'
 gem 'rspec', :group => :development
 gem "capybara", :group => :development
 gem 'thin'
 gem "rdf"
 gem "rdf-raptor"
 gem 'less'
-gem 'mongo_mapper'
+gem 'mongo_mapper', '>= 0.12.0'
 gem 'omniauth'
 gem 'omniauth-etsy'
 gem 'bson_ext'
