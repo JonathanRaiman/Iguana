@@ -1,10 +1,30 @@
 module ShopSearchMethods
 	def self.included(base); base.extend(ClassMethods);	end
 
+	def each_listing_with_tags tags
+		listings_with_tags.each do |listing|
+			yield(listing)
+		end
+	end
+
+	def each_listing_with_category_paths tags
+		listings_with_category_paths.each do |listing|
+			yield(listing)
+		end
+	end
+
+	def listings_with_tags tags
+		listings.reject {|i| (i.tags & tags).empty?}
+	end
+
+	def listings_with_category_paths categories
+		listings.reject {|i| (i.category_path & categories).empty?}
+	end
+
 	module ClassMethods
 
 		def find_all_listings
-			Shop.find_each do |shop|
+			Shop.find_each() do |shop|
 				shop.listings.each do |listing|
 					yield(listing,shop)
 				end

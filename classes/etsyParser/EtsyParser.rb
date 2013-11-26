@@ -9,8 +9,6 @@ module EtsyParser
 		def obtain_etsy_data(opts={})
 			shops = opts[:shops] || Etsy::Shop.all(opts)
 			current, total = 0, shops.length
-			queries_in_last_second = 0
-			last_query_time        = 
 			shops.aech do |shop|
 				t1 = Time.now
 				if shop.user

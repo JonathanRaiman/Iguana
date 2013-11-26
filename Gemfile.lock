@@ -83,6 +83,10 @@ GEM
       rack (>= 1.0)
     rdf (1.0.10)
       addressable (>= 2.3)
+    rdf-mongo (1.0.3)
+      addressable (>= 2.3.2)
+      mongo (>= 1.5.1)
+      rdf (>= 1.0)
     rdf-raptor (1.0.1)
       ffi (>= 1.0)
       rdf (>= 1.0.0)
@@ -153,6 +157,7 @@ DEPENDENCIES
   omniauth
   omniauth-etsy
   rdf
+  rdf-mongo
   rdf-raptor
   rspec
   sinatra

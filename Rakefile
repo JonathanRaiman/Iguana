@@ -17,3 +17,15 @@ task :etsy, :offset, :limit do |t, args|
 	require './app'
 	App.obtain_etsy_data :limit => args[:limit].to_i, :offset => args[:offset].to_i
 end
+
+desc 'Extract clusters from data'
+task :extract_clusters do
+	require './app'
+	App.extract_clusters
+end
+
+desc 'Load new triples'
+task :load_triples, :path do |t, args|
+	require './app'
+	App.rdf.load(args[:path])
+end
