@@ -6,7 +6,7 @@
 		<%= stylesheet_link_tag "/css/buttons.css", :media => "all" %>
 		<%= stylesheet_link_tag "/css/jquery.jqplot.css", :media => "all" %>
 		<%= stylesheet_link_tag "/css/index.css", :media => "all" %>
-		<meta charset=utf-8 />
+		<link href="http://fonts.googleapis.com/css?family=Pacifico" rel="stylesheet" type="text/css">		<meta charset=utf-8 />
 		<title><%= @title ? @title : SITENAME %></title>
 		<meta charset="utf-8" />
 	</head>
@@ -17,7 +17,12 @@
 		<%= javascript_script_tag "/js/buttons.js" %>
 		<%= javascript_script_tag "/js/highcharts.js" %>
 		<%= javascript_script_tag "/js/jquery.jqplot.min.js" %>
+		<%= javascript_script_tag "/js/plugins/jqplot.barRenderer.min.js" %>
+		<%= javascript_script_tag "/js/plugins/jqplot.categoryAxisRenderer.js" %>
+		<%= javascript_script_tag "/js/plugins/jqplot.canvasTextRenderer.js" %>
+		<%= javascript_script_tag "/js/plugins/jqplot.canvasAxisLabelRenderer.js" %>
 		<%= javascript_script_tag "/js/app.js" %>
+		<%= javascript_script_tag "/js/typeahead.min.js" %>
 		<%= javascript_script_tag "/js/index.js" %>
 	</body>
 </html>
