@@ -1,3 +1,139 @@
+
+<style>
+.carousel {
+	width: 100%;
+} 
+.carousel-control.left, .carousel-control.right {
+	background: none;
+	width: 3%;
+	color: #333;
+	outline: none;
+}
+.carousel-indicators {
+	top: 0;
+	height: 54px;
+	width: 100%;
+	margin-left: 0;
+	left : 0;
+	padding: 0;
+}
+.carousel-indicators li {
+	width: 24%;
+	padding: 0;
+	color: white;
+	line-height: 50px;
+	font-weight: 200;
+	font-size: 16px;
+	margin: 0px;
+	border-radius: 6px;
+	text-indent: 0px;
+	height: 50px;
+	vertical-align: top;
+	background: #52ADED;
+	background-image: linear-gradient(to bottom, #52ADED 0%, #418CE4 100%);
+	border:1px solid #eee;
+}
+.carousel-indicators li:hover {
+	background: #52ADED;
+}
+
+.carousel-indicators li span {
+	background: white;
+	color: #52ADED;
+	margin-right: 5px;
+	font-size: 16px;
+}
+.carousel-indicators .active {
+	width: 24%;
+	height: 50px;
+	border:1px solid #ccc;
+	vertical-align: top;
+	background: white;
+	color: #52ADED;
+}
+.carousel-indicators .active span {
+	background:#52ADED;
+	color: white;
+}
+.carousel-indicators .active:hover {
+	width: 24%;
+	height: 50px;
+	border:1px solid #ccc;
+	vertical-align: top;
+	background: white;
+	color: #52ADED;
+}
+.carousel-indicators .active:hover span {
+	background:#52ADED;
+	color: white;
+}
+.carousel .item {
+	background: none;
+	padding-top: 60px;
+}
+.carousel .item .container {
+}
+#introslide {
+	padding-top: 220px;
+	text-align: center;
+}
+#introslide .container #sellspan {
+	display: inline-block;
+	text-align: center;
+} 
+#introslide h2 {
+	display:inline-block;
+	margin-top: 0px;
+	font-size: 44px;
+	font-family: 'Pacifico', Helvetica, sans-serif;
+  	color: #2b2b2b;
+  	text-shadow: 3px 3px 0px rgba(0,0,0,0.1), 7px 7px 0px rgba(0,0,0,0.05);
+  	vertical-align: top;
+}
+#introslide input {
+	display: inline-block;
+	width: 400px;
+	margin-left: 30px;
+	background: none;
+	border: none;
+	vertical-align: top;
+	font-size: 40px;
+	border-bottom: 2px solid #333;
+}
+.twitter-typeahead {
+
+}
+.twitter-typeahead .tt-dropdown-menu {
+	background: none;
+	margin-left: 30px;
+	min-width: 400px;
+	text-align: left;
+}
+#addform .twitter-typeahead .tt-hint {
+}
+.twitter-typeahead .tt-dropdown-menu .tt-suggestion p {
+	margin: 0;
+	line-height: 40px;
+	height: 40px;
+	font-size: 20px;
+	padding-left: 5px;
+	
+}
+.twitter-typeahead .tt-dropdown-menu .tt-is-under-cursor {
+	background: #eee;
+}
+#chartdiv, #pricediv {
+	margin: 40px auto 0 auto;
+}
+#summary-text {
+	color: #333;
+	text-shadow: none;
+}
+.inactive {
+	opacity: .4;
+}
+</style>
+
 <div class="container container-gondola">
 	<div class="page-header">
 		<h1>Iguana</h1>
@@ -5,36 +141,51 @@
 		<%= erb :"index/_login_button" %>
 	</div>
 
-	<div class="button-container">
+<!--	<div class="button-container">
 		<a href="#" data-class="button-caution" class="button button-rounded button-caution button-pill">Art</a>
 		<a href="#" data-class="button-royal" class="button button-rounded button-royal button-pill">Toys</a>
 		<a href="#" data-class="button-primary" class="button button-rounded button-primary button-pill">Jewelry</a>
 		<a href="#" data-class="button-highlight" class="button button-rounded button-highlight button-pill">Women</a>
 		<a href="#" data-class="button-action" class="button button-rounded button-action button-pill">Vintage</a>
-	</div>
+	</div>.-->
 
 	<div id="myCarousel" class="carousel slide" data-ride="carousel">
-		<!-- <ol class="carousel-indicators">
-			<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-			<li data-target="#myCarousel" data-slide-to="1" class=""></li>
-			<li data-target="#myCarousel" data-slide-to="2" class=""></li>
-		</ol> -->
-		<div class="carousel-inner">
-			<div class="item active">
-				<img src="http://placehold.it/800x400" alt="">
+		<ol class="carousel-indicators">
+			<li data-target="#myCarousel" data-slide-to="0" class="active"><span class="badge">1</span>Item Select</li>
+			<li id="button2" data-target="" data-slide-to="1" class="inactive"><span class="badge">2</span>Category</li>
+			<li id="button3" data-target="" data-slide-to="2" class="inactive"><span class="badge">3</span>Price</li>
+			<li id="button4" data-target="" data-slide-to="3" class="inactive"><span class="badge">4</span>Summary</li>
+		</ol>
+		<div id="#car" class="carousel-inner">
+			<div id="introslide" class="item active">
 				<div class="container">
-					<div class="carousel-caption">
-							<h1>Hello world</h1>
-							<p>world says hello</p>
+					<span id="sellspan"><h2>I am selling a</h2><input class="typeahead" type="text"></span>
+				</div>
+			</div>
+			<div class="item">
+				<div class="container">
+					<div class="row">
+					  <div class="col-md-12">
+					  	<div id="chartdiv" style="height:400px;width:85%;"></div>
+					  </div>
 					</div>
 				</div>
 			</div>
 			<div class="item">
-				<img src="http://placehold.it/800x400" alt="">
+				<img src="" alt="">
+				<div class="container">
+					<div class="row">
+					  <div class="col-md-12">
+					  	<div id="pricediv" style="height:400px;width:85%;"></div>
+					  </div>
+					</div>
+				</div>
+			</div>
+			<div class="item">
 				<div class="container">
 					<div class="carousel-caption">
-							<h1>Goodbye world</h1>
-							<p>world says goodbye</p>
+							<h4 id="summary-text">I'm selling a <span id="span-item">item</span> in the category <span id="span-category">of Etsy</span> in the price range of <span id="span-price">all prices</span></h4>
+							<span class="button-wrap"><a href="http://www.etsy.com" class="button button-circle button-highlight">List Item</a></span>
 					</div>
 				</div>
 			</div>
@@ -47,18 +198,6 @@
 		</a>
 	</div>
 
-	<div class="row graph-row">
-	  <div class="col-md-12 col-xs-12">
-	  	<h3>Sale Price Range</h3>
-		<div id="graphone" class="graphcontainer"></div>
-	  </div>
-	</div>
-	<div class="row graph-row">
-	  <div class="col-md-12 col-xs-12">
-	  	<h3>Views Range</h3>
-		<div id="chartdiv" style="height:400px;width:100%; "></div>
-	  </div>
-	</div>
 	
 	
 </div>
