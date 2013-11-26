@@ -1,6 +1,6 @@
 # coding: utf-8
 # Load some rubygems:
-%w(yaml box_puts json thin omniauth omniauth-etsy jraiman_progressbar).map {|d| require(d)}
+%w(yaml box_puts json thin omniauth omniauth-etsy jraiman_progressbar rdf rdf/mongo rdf/raptor).map {|d| require(d)}
 
 # then load some classes:
 [
