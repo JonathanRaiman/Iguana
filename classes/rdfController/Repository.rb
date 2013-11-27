@@ -10,7 +10,7 @@ module RDF
 			end
 
 			def find_wordsense word_node
-				query([nil, RDF::WN20.containsWordSense, word_node]).to_a
+				query([nil, RDF::WN20.containsWordSense, word_node]).map {|i| i.subject}
 			end
 
 			def find_wordsense_words wordsense_node
@@ -19,14 +19,10 @@ module RDF
 				end
 			end
 
-			def find_wordsense_from_hyponym wordsense_node
-
-			end
-
 			def find_parent_hyponyms wordsense_node
 				query([wordsense_node, RDF::WN20.hyponymOf, nil]).map do |hyponym|
 					hyponym.object
-				end
+				end.first
 			end
 
 			def find_children_hyponyms wordsense_node

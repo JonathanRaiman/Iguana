@@ -1,5 +1,5 @@
 require './app.rb'
-describe EtsyAnalytics do
+describe 'Wordnet and rdf' do
 
 	before(:all) do
 		@word = App.rdf.find_word("jewelry").first
@@ -22,9 +22,9 @@ describe EtsyAnalytics do
 	end
 
 	it 'should find other elements in a wordnet synset' do
-		similar_words = @word.similar - @word
+		similar_words = @word.similar - [@word.object.to_s]
 		similar_words.should_not be_empty
-		similar_words.should include(App.rdf.find_word("jewellery").first)
+		similar_words.should include("jewellery")
 	end
 
 	it 'should find a word\' related listings' do
@@ -39,9 +39,9 @@ describe EtsyAnalytics do
 		word = App.rdf.find_word("chair").first
 		word.related_hyponyms.should_not be_empty
 		word.related_hyponyms.should include(
-			RDF::WN30["synset-seat-noun-3"],
-			RDF::WN30["synset-lawn_chair-noun-1"],
-			RDF::WN30["synset-Eames_chair-noun-1"])
+			Synset.new("seat", index: 3),
+			Synset.new("lawn chair"),
+			Synset.new("Eames chair"))
 	end
 
 	it 'should find a word\'s hyponymically related words' do
@@ -53,11 +53,12 @@ describe EtsyAnalytics do
 	end
 
 	it 'should find a word\'s hyponymically related listings' do
-		listings =@chair.listings
+		listings = @chair.listings
 		hyponym_listings = @chair.listings_hyponym
 		listings.should_not be_empty
 		hyponym_listings.should_not be_empty
 		listings.length.should be < hyponym_listings.length
 	end
+
 
 end

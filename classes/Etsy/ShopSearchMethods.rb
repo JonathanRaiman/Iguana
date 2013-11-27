@@ -6,11 +6,15 @@ module ShopSearchMethods
 			yield(listing)
 		end
 	end
-
+	
 	def each_listing_with_category_paths tags
 		listings_with_category_paths.each do |listing|
 			yield(listing)
 		end
+	end
+
+	def listings_with_words words
+		listings.reject {|i| ((i.tags + i.category_path) & words).empty?}
 	end
 
 	def listings_with_tags tags
@@ -29,6 +33,17 @@ module ShopSearchMethods
 					yield(listing,shop)
 				end
 			end
+		end
+
+		def listings_with_words words
+			found = []
+			Shop.find_each(:"$or" => [
+				{:"listings.tags" => words},
+				{:"listings.category_path" => words}
+				]) do |shop|
+				found += shop.listings_with_words(words)
+			end
+			found
 		end
 
 		def find_all_listing_for_category category

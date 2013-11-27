@@ -1,3 +1,4 @@
+require 'rspec/core/rake_task'
 desc 'Preprocess LESS files to create CSS'
 task :less do
 	require './app'
@@ -28,4 +29,9 @@ desc 'Load new triples'
 task :load_triples, :path do |t, args|
 	require './app'
 	App.rdf.load(args[:path])
+end
+
+RSpec::Core::RakeTask.new(:test) do |t|
+	t.pattern = 'specs/*.rb'
+	t.rspec_opts = '--color --format s'
 end

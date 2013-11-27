@@ -1,4 +1,3 @@
-require 'ostruct'
 class DatabaseConfiguration < OpenStruct
 	def self.from_url url
 		db = URI.parse(url)

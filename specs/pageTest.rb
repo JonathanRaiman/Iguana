@@ -5,9 +5,11 @@ Capybara.app = App
 RSpec.configure {|conf| conf.include Rack::Test::Methods}
 include Capybara::DSL
 
-describe "App" do
-	it 'should show a homepage', :type => :feature  do
+describe "Iguana's front-end" do
+	it 'should show a webpage', :type => :feature  do
 		visit '/'
-		expect(page).to have_content('Hello World')
+		expect(page).to have_content('Linked Data Ventures')
 	end
+
+	# improve specs here for all the javascript we have.
 end

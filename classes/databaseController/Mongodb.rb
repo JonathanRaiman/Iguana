@@ -10,6 +10,11 @@ module Mongodb
 			MongoMapper.connection = db_connection
 			@@RDF = RDF::Mongo::Repository.new(:db => db.database_name,:collection => "rdf")
 			@@RDF.db = db_connection
+			@@RDFdatabase_name = db.database_name
+		end
+
+		def rdf_collection
+			App.rdf.db.db(@@RDFdatabase_name).collection("rdf")
 		end
 
 		def rdf
