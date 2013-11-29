@@ -17,7 +17,7 @@ class Shop
 	many :listings,	:class => Listing
 
 	ensure_index [[:shop_id, 1]], :unique => true, :dropDups => true
-
+	ensure_index [[:"listings.wordnet_words", 1]]
 end
 
 class Etsy::Shop

@@ -1,23 +1,26 @@
 require './app.rb'
-describe 'Clustering' do
+describe 'Wordnet Hierarchy' do
 
 	before(:all) do
 		@lawn_chair = App.rdf.find_word("lawn chair").first
 		@n = 20
+		@chair = Synset.new("chair")
+		@furniture = Synset.new("furniture")
+		@seat = Synset.new("seat", index: 3)
 	end
 
 	it 'should find the topmost element of word' do
 		@lawn_chair.topmost_hyponym.should be Synset::Entity
-		@lawn_chair.topmost_hyponym(Synset.new("furniture")).should be Synset.new("seat", index: 3)
+		@lawn_chair.topmost_hyponym(@furniture).should be @seat
 	end
 
 	it 'should find the topmost element of hyponym' do
-		Synset.new("chair").topmost_hyponym.should be Synset::Entity
-		Synset.new("chair").topmost_hyponym(Synset.new("furniture")).should be Synset.new("seat", index: 3)
+		@chair.topmost_hyponym.should be Synset::Entity
+		@chair.topmost_hyponym(@furniture).should be @seat
 	end
 
 	it 'should find the children for multiple synsets a once' do
-		furniture, bracelet = Synset.new("furniture"), Synset.new("bracelet")
+		furniture, bracelet = @furniture, Synset.new("bracelet")
 		method1 = Synset.find_children [furniture, bracelet]
 		method2 = furniture.find_children + bracelet.find_children
 		method1.length.should eq method2.length
@@ -51,8 +54,8 @@ describe 'Clustering' do
 	end
 
 	it 'should find the listings for a level n' do
-		level = Synset.new("chair").level
-		search = Synset.new("seat", index:3).listings_for_level(level)
+		level  = @chair.level
+		search = @seat.listings_for_level(level)
 		search.level.should be level
 		search.listings.should_not be_empty
 	end

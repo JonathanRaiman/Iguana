@@ -30,3 +30,4 @@ gem 'libv8'
 gem "rdf"
 gem 'rdf-mongo'
 gem "rdf-raptor"
+gem 'named_vector'

@@ -1,24 +1,13 @@
 # coding: utf-8
 # Load some rubygems:
-%w(yaml box_puts json thin omniauth omniauth-etsy jraiman_progressbar rdf rdf/mongo rdf/raptor ostruct).map {|d| require(d)}
+%w(yaml box_puts json thin omniauth omniauth-etsy jraiman_progressbar rdf rdf/mongo rdf/raptor ostruct named_vector).map {|d| require(d)}
 
 # then load some classes:
 [
 	'../classes/sinatra',
 	'../classes/databaseController/Mongodb',
 	'../classes/databaseController/DatabaseConfiguration',
-	'../classes/rdfController/namespaces',
-	'../classes/rdfController/Repository',
-	'../classes/rdfController/Literal',
-	'../classes/rdfController/WordnetURI',
-	'../classes/rdfController/WordnetStatement',
-	'../classes/rdfController/WordnetEtsyStatement',
-	'../classes/rdfController/WordnetEtsyURI',
-	'../classes/rdfController/WordnetEtsyListing',
-	'../classes/rdfController/NilWordSense',
-	'../classes/rdfController/Statement',
-	'../classes/rdfController/URI',
-	'../classes/rdfController/Synset',
+	'../classes/rdfController/configuration',
 	'../classes/Etsy/Etsy',
 	'../classes/etsyParser/EtsyParser',
 	'../classes/etsyParser/Clusters',
@@ -32,3 +21,5 @@ class App;include(EtsyAnalytics);end
 class App;include(TabController);end
 class App;include(EtsyParser);end
 class Shop;include(ShopSearchMethods);end
+class Listing;include(ListingWordnetSearch);end
+class Listing;include(ListingExpansion);end

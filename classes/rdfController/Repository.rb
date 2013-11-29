@@ -5,6 +5,20 @@ module RDF
 				query([nil, RDF::RDFS.label, RDF::Literal.new(word, :language => "en-us")]).to_a
 			end
 
+			def find_words words
+				words.empty? ? [] : App.rdf_collection.find({
+					:"$or" => words.map {|i| {:o => i}},
+					:p => RDF::RDFS.label.to_s}).map do |data|
+					RDF::Statement.from_mongo(data)
+				end
+			end
+
+			def count_words words
+				words.empty? ? 0 : App.rdf_collection.find({
+					:"$or" => words.map {|i| {:o => i}},
+					:p => RDF::RDFS.label.to_s}).count
+			end
+
 			def find_word_for_node node
 				query([node, RDF::RDFS.label, nil]).to_a.first
 			end

@@ -1,5 +1,4 @@
 module ShopSearchMethods
-	def self.included(base); base.extend(ClassMethods);	end
 
 	def each_listing_with_tags tags
 		listings_with_tags.each do |listing|
@@ -27,8 +26,8 @@ module ShopSearchMethods
 
 	module ClassMethods
 
-		def find_all_listings
-			Shop.find_each() do |shop|
+		def each_listing(opts={})
+			Shop.find_each(opts) do |shop|
 				shop.listings.each do |listing|
 					yield(listing,shop)
 				end
@@ -60,5 +59,7 @@ module ShopSearchMethods
 			end
 		end
 	end
+
+	def self.included(base); base.extend(ClassMethods);	end
 
 end

@@ -4,12 +4,13 @@ module Synset
 		index = opts[:index] || "1"
 		RDF::WN30["synset-#{name.gsub(" ", "_")}-#{pos}-#{index}"]
 	end
-	Entity = Synset.new("entity")
-	PhysicalEntity = Synset.new("physical entity")
-	Object = Synset.new("object")
-	Whole =  Synset.new("whole", index:2)
-	Artifact = Synset.new("artifact")
-	Instrumentality = Synset.new("instrumentality", index:3)
+
+	Entity          = Synset.new "entity"
+	PhysicalEntity  = Synset.new "physical entity"
+	Object          = Synset.new "object"
+	Whole           = Synset.new "whole", index:2
+	Artifact        = Synset.new "artifact"
+	Instrumentality = Synset.new "instrumentality", index:3
 
 	def self.ethereal
 		[Entity,PhysicalEntity,Object,Whole,Artifact,Instrumentality]
