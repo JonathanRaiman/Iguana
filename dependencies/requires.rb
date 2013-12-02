@@ -13,8 +13,11 @@
 	'../classes/etsyParser/Clusters',
 	'../classes/authController/authController',
 	'../classes/authController/warden',
+	'../classes/mainController/assets',
 	'../classes/mainController/autocomplete',
 	'../classes/mainController/routes',
+	'../classes/KPIController/dataAPI',
+	'../classes/KPIController/routes',
 	'../classes/tabController/TabController'
 ].map {|d| require_relative(d)}
 
@@ -22,6 +25,7 @@ class App;include(EtsyAnalytics);end
 class App;include(TabController);end
 class App;include(EtsyParser);end
 class App;helpers Sinatra::Autocomplete;end
+class App;helpers Sinatra::DataAPI;end
 class Shop;include(ShopSearchMethods);end
 class Listing;include(ListingWordnetSearch);end
 class Listing;include(ListingExpansion);end

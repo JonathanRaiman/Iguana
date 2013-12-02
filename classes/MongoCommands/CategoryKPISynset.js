@@ -34,7 +34,7 @@ function (start, end, _args) {
 	// -mean gross
 	// -total gross
 
-	function AssociateSynsets (name, totalCount) {
+	function AssociateSynsets (name) {
 
 		var synset_counts = [];
 
@@ -55,7 +55,7 @@ function (start, end, _args) {
 				if (intersection_count > 0)
 					synset_counts.push({
 						name: listing_count._id,
-						prob: parseFloat(intersection_count) / parseFloat(totalCount)
+						prob: parseFloat(intersection_count) / parseFloat(listing_count.listings_similar_count)
 					});
 			}
 
@@ -77,7 +77,7 @@ function (start, end, _args) {
 	}
 
 	function CreateSynsetInformation (category) {
-		var associated_synsets = AssociateSynsets(category._id, category.count);
+		var associated_synsets = AssociateSynsets(category._id);
 		if (associated_synsets.length > 0) {
 			db[categories_collection_name].update({
 				_id: category._id
@@ -85,7 +85,7 @@ function (start, end, _args) {
 			{
 				$push: {
 					associated_synsets: {
-						$each : AssociateSynsets(category._id, category.count)
+						$each : associated_synsets
 					}
 				}
 			});

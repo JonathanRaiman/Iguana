@@ -39,5 +39,20 @@ class Listing
 			search_opts = {:words => /#{term}/i}
 			Listing::Count.where(search_opts.merge(opts)).sort(:listings_similar_count.desc).all
 		end
+
+		# find most correlated categories
+		def correlated_categories
+			Category.where(:"associated_synsets.name" => _id).all
+		end
+
+		def correlated_categories_score_only
+			cc = correlated_categories
+			cc.each do |i|
+				i.associated_synsets.reject! do |synset|
+					synset.name != _id
+				end
+			end
+			cc
+		end
 	end
 end

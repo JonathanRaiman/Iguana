@@ -14,6 +14,7 @@ class App < Sinatra::Base
 		:logout               => "/logout",
 		:auth_failure         => "/auth/failure",
 		:data                 => "/data.json",
+		:old_data             => "/old_data.json",
 		:autocomplete         => "/search.json"
 	}
 	before {session[:locale]||= "en"}

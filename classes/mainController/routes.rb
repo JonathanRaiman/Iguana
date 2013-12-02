@@ -3,7 +3,7 @@ class App < Sinatra::Base
 		erb :"index/_index"
 	end
 
-	post URLS[:data] do
+	post URLS[:old_data] do
 		types = JSON.parse(params[:types])
 		hists = App.histogram_for(:category => params[:category], :boxes => params[:boxes] ? params[:boxes].to_i : 10, :types => types)
 		resp = {

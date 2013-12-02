@@ -20,25 +20,48 @@ var pricevalues = [200, 600, 700, 1010,200];
 
 $(document).ready(function() {
 
+var api_url = "/data.json";
+
+function make_api_request(data, cb, cberror) {
+	return $.ajax({
+		dataType: "json",
+		url: api_url,
+		type:"POST",
+		data: data,
+		success: cb,
+		error: cberror
+	});
+}
+
+function get_correlated_categories(item_id, cb, cberror) {
+	return make_api_request({
+		'request_type':"category_stats",
+		'_id': item_id
+	}, cb, cberror);
+}
+
+function plotCategories (response) {
+	response.sort( function (a,b) {
+		return b.associated_synsets[0].prob-a.associated_synsets[0].prob;
+	});
+
+	console.log(response);
+	response = response.slice(10,9999999999);
+
+	var names  = response.map(function (i) {return i["id"];});
+	var values = response.map(function (i) {return i["ratio_of_visibility"];});
+	plotdiv(names, values);
+}
+
 //****************************************
 //** Carousel Functionality **************
 //****************************************
 function onAutocompleted($e, datum) {
-	item = datum.value;
+	item = datum._id;
 	$('.carousel').carousel(1);
 	$("#button2").removeClass("inactive");
 	$("#button2").attr("data-target","#myCarousel");
-	$.ajax({
-		dataType: "json",
-		url: "",
-		type:"POST",
-		data: {'item':item},
-		success: function(response) {	
-		},
-		error: function() {
-			plotdiv(categorynames,categoryvalues);
-		}
-	});
+	var req = get_correlated_categories(item, plotCategories, function (response) {plotdiv(categorynames,categoryvalues)});
 }
 
 $('.carousel').carousel({
