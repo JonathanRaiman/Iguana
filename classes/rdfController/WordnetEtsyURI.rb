@@ -1,10 +1,15 @@
 module RDF
 	module WordnetEtsy
 		module URI
+
 			def listings
 				words    = find_words
 				listings = Shop.listings_with_words(words.map {|i| i.superformat}.flatten)
 				OpenStruct.new hyponym: self, words: words, listings: listings
+			end
+
+			def listings_count
+				listings.listings.count
 			end
 
 			def listings_for_topmost_categories size

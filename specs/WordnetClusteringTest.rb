@@ -1,6 +1,8 @@
 require './app.rb'
 describe 'Wordnet Clustering' do
 
+	# what if we were to do k-means clustering, then we would need a similarity function? here it is:
+
 	before(:each) do
 		@listing = Listing.new(
 			:title => "High quality 100% cotton cot bed and pillow case set",
@@ -23,12 +25,14 @@ describe 'Wordnet Clustering' do
 		Shop.first(:shop_id => 007).destroy
 	end
 
-	# it 'should obtain the distance between any two listings' do
-		
-	# end
-
-	# it 'should create n clusters for all listings' do
-
-	# end
+	it 'should obtain the distance between any two listings' do
+		@listing2 = Listing.new(
+			:title => "High quality 100% cotton cot bed and pillow case set",
+			:tags => ["cot bed"],
+			:category_path => %w(Children Cannibalism)
+		)
+		@listing2.expand_tags
+		(@listing*@listing2).should be_within(0.5).of 0.8
+	end
 
 end

@@ -6,13 +6,16 @@
 		<%= stylesheet_link_tag "/css/buttons.css", :media => "all" %>
 		<%= stylesheet_link_tag "/css/jquery.jqplot.css", :media => "all" %>
 		<%= stylesheet_link_tag "/css/index.css", :media => "all" %>
-		<link href="http://fonts.googleapis.com/css?family=Pacifico" rel="stylesheet" type="text/css">		<meta charset=utf-8 />
+		<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,800' rel='stylesheet' type='text/css'>
+		<!-- <link href="http://fonts.googleapis.com/css?family=Pacifico" rel="stylesheet" type="text/css"> -->
+		<meta charset=utf-8 />
 		<title><%= @title ? @title : SITENAME %></title>
 		<meta charset="utf-8" />
 	</head>
 	<body>
 		<%= yield %>
 		<%= javascript_script_tag "js/jquery.min.js"    %>
+		<%= javascript_script_tag "http://twitter.github.com/hogan.js/builds/2.0.0/hogan-2.0.0.js" %>
 		<%= javascript_script_tag "js/bootstrap.min.js" %>
 		<%= javascript_script_tag "/js/buttons.js" %>
 		<%= javascript_script_tag "/js/highcharts.js" %>

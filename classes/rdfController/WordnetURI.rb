@@ -1,6 +1,11 @@
 module RDF
 	module Wordnet
 		module URI
+			def similar
+				wordsense = App.rdf.find_wordsense(self)
+				Synset.find_words wordsense
+			end
+
 			def find_parent
 				App.rdf.find_parent_hyponyms(self)
 			end

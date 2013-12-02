@@ -11,13 +11,16 @@ a:hover, a:focus {
 .page-header {
 	text-align: center;
 	margin: 20px 0px;
-	padding-bottom: 40px;
-	border-bottom:1px solid #f4f4f4;
+	padding-bottom: 20px;
+	border: none;
+	/*border-bottom:1px solid #f4f4f4;*/
 }
 .page-header h1 {
-	font-size: 70px;
-	color: #fff;
-	text-shadow: 0 0 3px #000;
+	font-size: 35px;
+	font-family: 'Open Sans', 'Helvetica Neue', Helvetica, sans-serif;
+	font-weight: 800;
+	text-align: left;
+	/*text-shadow: 0 0 3px #000;*/
 }
 .page-header h2 {
 	color: #888;

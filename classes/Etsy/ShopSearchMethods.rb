@@ -34,6 +34,16 @@ module ShopSearchMethods
 			end
 		end
 
+		def total_listings_and_views
+			total = 0
+			total_views = 0
+			each_listing do |listing|
+				total+=1
+				total_views += listing.views
+			end
+			[total, total_views]
+		end
+
 		def listings_with_words words
 			found = []
 			Shop.find_each(:"$or" => [

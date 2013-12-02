@@ -8,4 +8,4 @@ class App
 		DatabaseConfiguration.new(:host => "localhost", :port => nil, :database_name => "iguana"))
 end
 
-%w(Listing Shop User configuration Category Tag ShopSearchMethods ListingWordnetSearch ListingExpansion).map {|d| require_relative(d)}
+%w(Listing ListingCount Shop User configuration Category Tag ShopSearchMethods ListingWordnetSearch ListingExpansion).map {|d| require_relative(d)}

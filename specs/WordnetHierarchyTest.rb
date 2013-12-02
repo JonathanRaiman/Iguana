@@ -60,12 +60,9 @@ describe 'Wordnet Hierarchy' do
 		search.listings.should_not be_empty
 	end
 
-	# it 'should number of listings not covered by the n topmost elements' do
-	# 	false.should be_true
-	# end
-
-	# it 'should assign an id to the children of the n topmost elements' do
-	# 	false.should be_true
-	# end
+	it 'should find and store the number of a listings for a similarity class' do
+		pillowcase = App.rdf.find_word("pillowcase").first
+		count = pillowcase.store_listings_count
+	end
 
 end

@@ -3,8 +3,7 @@ module RDF
 		module Statement
 			def similar
 				[] unless predicate == RDF::RDFS.label
-				wordsense = find_wordsense
-				Synset.find_words wordsense
+				subject.similar
 			end
 
 			def superformat

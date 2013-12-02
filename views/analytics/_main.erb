@@ -40,7 +40,7 @@
 .carousel-indicators li span {
 	background: white;
 	color: #52ADED;
-	margin-right: 5px;
+	/*margin-right: 5px;*/
 	font-size: 16px;
 }
 .carousel-indicators .active {
@@ -80,15 +80,18 @@
 #introslide .container #sellspan {
 	display: inline-block;
 	text-align: center;
-} 
+}
+#introslide h2, #introslide input{
+	font-family: 'Open-sans', Helvetica, sans-serif;
+	font-size: 44px;
+	font-weight: 800;
+	vertical-align: top;
+}
 #introslide h2 {
 	display:inline-block;
 	margin-top: 0px;
-	font-size: 44px;
-	font-family: 'Pacifico', Helvetica, sans-serif;
-  	color: #2b2b2b;
-  	text-shadow: 3px 3px 0px rgba(0,0,0,0.1), 7px 7px 0px rgba(0,0,0,0.05);
-  	vertical-align: top;
+	color: #2b2b2b;
+  	/*text-shadow: 3px 3px 0px rgba(0,0,0,0.1), 7px 7px 0px rgba(0,0,0,0.05);*/
 }
 #introslide input {
 	display: inline-block;
@@ -96,12 +99,13 @@
 	margin-left: 30px;
 	background: none;
 	border: none;
-	vertical-align: top;
-	font-size: 40px;
-	border-bottom: 2px solid #333;
+	border-bottom: 2px solid #e72d47;
+	margin-top:-5px;
+	color: #e72d47;
+	outline: none;
 }
-.twitter-typeahead {
-
+.carousel-control .glyphicon-chevron-right, .carousel-control .glyphicon-chevron-left {
+	text-shadow: none;
 }
 .twitter-typeahead .tt-dropdown-menu {
 	background: none;
@@ -136,8 +140,7 @@
 
 <div class="container container-gondola">
 	<div class="page-header">
-		<h1>Iguana</h1>
-		<h2>The most advanced Etsy Analytics Platform</h2>
+		<h1><%= t.company_name %> <small class="tagline"><%= t.tagline %></small></h1>
 		<%= erb :"index/_login_button" %>
 	</div>
 
@@ -151,15 +154,27 @@
 
 	<div id="myCarousel" class="carousel slide" data-ride="carousel">
 		<ol class="carousel-indicators">
-			<li data-target="#myCarousel" data-slide-to="0" class="active"><span class="badge">1</span>Item Select</li>
-			<li id="button2" data-target="" data-slide-to="1" class="inactive"><span class="badge">2</span>Category</li>
-			<li id="button3" data-target="" data-slide-to="2" class="inactive"><span class="badge">3</span>Price</li>
-			<li id="button4" data-target="" data-slide-to="3" class="inactive"><span class="badge">4</span>Summary</li>
+			<li data-target="#myCarousel" data-slide-to="0" class="active">
+				<span class="hidden-xs"><span class="badge">1</span> Item Select</span>
+				<span class="visible-xs hidden-sm hidden-md hidden-lg">1</span>
+			</li>
+			<li id="button2" data-target="" data-slide-to="1" class="inactive">
+				<span class="hidden-xs"><span class="badge">2</span> Category</span>
+				<span class="visible-xs hidden-sm hidden-md hidden-lg">2</span>
+			</li>
+			<li id="button3" data-target="" data-slide-to="2" class="inactive">
+				<span class="hidden-xs"><span class="badge">3</span> Price</span>
+				<span class="visible-xs hidden-sm hidden-md hidden-lg">3</span>
+			</li>
+			<li id="button4" data-target="" data-slide-to="3" class="inactive">
+				<span class="hidden-xs"><span class="badge">4</span> Summary</span>
+				<span class="visible-xs hidden-sm hidden-md hidden-lg">4</span>
+			</li>
 		</ol>
 		<div id="#car" class="carousel-inner">
 			<div id="introslide" class="item active">
 				<div class="container">
-					<span id="sellspan"><h2>I am selling a</h2><input class="typeahead" type="text"></span>
+					<span id="sellspan"><h2><%= t.selling %></h2><input class="typeahead" type="text"></span>
 				</div>
 			</div>
 			<div class="item">
@@ -184,8 +199,8 @@
 			<div class="item">
 				<div class="container">
 					<div class="carousel-caption">
-							<h4 id="summary-text">I'm selling a <span id="span-item">item</span> in the category <span id="span-category">of Etsy</span> in the price range of <span id="span-price">all prices</span></h4>
-							<span class="button-wrap"><a href="http://www.etsy.com" class="button button-circle button-highlight">List Item</a></span>
+						<h4 id="summary-text">I'm selling a <span id="span-item">item</span> in the category <span id="span-category">of Etsy</span> in the price range of <span id="span-price">all prices</span></h4>
+						<span class="button-wrap"><a href="http://www.etsy.com" class="button button-circle button-highlight">List Item</a></span>
 					</div>
 				</div>
 			</div>
@@ -197,7 +212,4 @@
 			<span class="glyphicon glyphicon-chevron-right"></span>
 		</a>
 	</div>
-
-	
-	
 </div>

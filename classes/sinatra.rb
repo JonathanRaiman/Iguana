@@ -13,7 +13,8 @@ class App < Sinatra::Base
 		:auth                 => "/auth/:provider/callback",
 		:logout               => "/logout",
 		:auth_failure         => "/auth/failure",
-		:data                 => "/data.json"
+		:data                 => "/data.json",
+		:autocomplete         => "/search.json"
 	}
 	before {session[:locale]||= "en"}
 

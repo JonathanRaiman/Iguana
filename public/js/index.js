@@ -1,11 +1,22 @@
+String.prototype.capitalize=function(){
+	var words = this.split(" ");
+	for (var i=0; i<words.length; i++){
+		words[i] = words[i].substring(0,1).toUpperCase()+words[i].substring(1,words[i].length).toLowerCase();
+	}
+	return words.join(" ");
+};
+
 var category = '';
 var price = '';
 var item = '';
 
+
+// <Prebaked data>
 var categorynames = ['July', 'August','May', 'June', 'July', 'August','May', 'June', 'July', 'August','May', 'June', 'July', 'August','May', 'June', 'July', 'August','May', 'June', 'July', 'August'];
 var categoryvalues = [200, 600, 700, 1010,200, 600, 700, 1000, 200, 600, 700, 1000,200, 600, 700, 1000,200, 600, 700, 1010,200, 600, 700, 1000, 200, 600, 700, 1000,200, 600, 700, 1000,200, 600, 700, 1010,200, 600, 700, 1000, 200, 600, 700, 1000,200, 600, 700, 1000];
 var pricenames = ['$1-10','$11-20','$21-30','$31-40','$41-50'];
 var pricevalues = [200, 600, 700, 1010,200];
+// </Prebaked data>
 
 $(document).ready(function() {
 
@@ -14,7 +25,6 @@ $(document).ready(function() {
 //****************************************
 function onAutocompleted($e, datum) {
 	item = datum.value;
-	console.log(item);
 	$('.carousel').carousel(1);
 	$("#button2").removeClass("inactive");
 	$("#button2").attr("data-target","#myCarousel");
@@ -26,7 +36,6 @@ function onAutocompleted($e, datum) {
 		success: function(response) {	
 		},
 		error: function() {
-			console.log("cool");
 			plotdiv(categorynames,categoryvalues);
 		}
 	});
@@ -60,17 +69,51 @@ $('.carousel').on('slide.bs.carousel', function () {
 //** Type Ahead Functionality ************
 //****************************************
 
-$('.typeahead').typeahead({
-	name: 'countries',
-	local: ['bracelet','white bracelet','pink bracelet'],
-}).on('typeahead:selected', onAutocompleted).on('typeahead:autocompleted', onAutocompleted);
+// Typeahead preferences
 
-$(document).keypress(function(event) {
-	 if ( event.keyCode == 13 ) {
-		var inputval = $($(".twitter-typeahead span")[0]).text();
-		onAutocompleted('a',{'value':inputval});
+(function () {
+
+	function processDuplicateTokens (tokens) {
+		var keys = [];
+		var found_keys = [];
+		for (var i=0;i < tokens.length; i++) {
+			var capitalized = tokens[i].capitalize();
+			if (!found_keys[capitalized]) {
+				keys.push(capitalized);
+				found_keys[capitalized] = true;
+			}
+		}
+		return keys;
 	}
-});
+
+	function processResponse (response) {
+		var processResult = function (result) {
+			var processed_tokens = processDuplicateTokens(result.tokens);
+			return {count: result.count, tokens:processed_tokens, value: processed_tokens.join(", "), words: processed_tokens.join(", "), _id: result._id};
+		};
+		return response.results.map(processResult);
+	}
+
+	var typeahead_settings = {
+		name: 'items',
+		template: "<h3>{{words}}</h3><p><span class='badge'>{{count}}</span></p>",
+		remote: {
+			url:'/search.json?search=%QUERY',
+			filter: processResponse
+		},
+		engine: Hogan
+	};
+
+	$('.typeahead').typeahead(typeahead_settings).on('typeahead:selected', onAutocompleted).on('typeahead:autocompleted', onAutocompleted);
+
+	$(document).keypress(function(event) {
+		if ( event.keyCode == 13 ) {
+			var inputval = $($(".twitter-typeahead span")[0]).text();
+			onAutocompleted('a',{'value':inputval});
+		}
+	});
+
+})();
 	
 //****************************************
 //***** Chart Functionality **************
@@ -79,30 +122,30 @@ $(document).keypress(function(event) {
 //*** Plot the chart div *********************
 
 function plotdiv(categorynames,categoryvalues) { $.jqplot('chartdiv', [categoryvalues], {
-        seriesDefaults:{
-            renderer:$.jqplot.BarRenderer,
-            rendererOptions: {fillToZero: true, varyBarColor: true,barMargin:2,shadowDepth: 0},
-            color: '#52ADED'
-        },
-        title: 'Best Categories to List Your Item',  
-        seriesColors:colorList(categoryvalues,'category'),
-       axes: {
-            // Use a category axis on the x axis and use our custom ticks.
-            xaxis: {
-                renderer: $.jqplot.CategoryAxisRenderer,
-                ticks: categorynames,
-                label:'Category',
-            },
-            // Pad the y axis just a little so bars can get close to, but
-            // not touch, the grid boundaries.  1.2 is the default padding.
-            yaxis: {
-                pad: 1.05,
-                tickOptions: {formatString: '%d'},
-                label:'Expected Views',
-                labelRenderer: $.jqplot.CanvasAxisLabelRenderer
-            }
-        },
-        grid: {
+		seriesDefaults:{
+			renderer:$.jqplot.BarRenderer,
+			rendererOptions: {fillToZero: true, varyBarColor: true,barMargin:2,shadowDepth: 0},
+			color: '#52ADED'
+		},
+		title: 'Best Categories to List Your Item',  
+		seriesColors:colorList(categoryvalues,'category'),
+		axes: {
+			// Use a category axis on the x axis and use our custom ticks.
+			xaxis: {
+				renderer: $.jqplot.CategoryAxisRenderer,
+				ticks: categorynames,
+				label:'Category',
+			},
+			// Pad the y axis just a little so bars can get close to, but
+			// not touch, the grid boundaries.  1.2 is the default padding.
+			yaxis: {
+				pad: 1.05,
+				tickOptions: {formatString: '%d'},
+				label:'Expected Views',
+				labelRenderer: $.jqplot.CanvasAxisLabelRenderer
+			}
+		},
+		grid: {
 			drawGridLines: true,        // whether to draw lines across the grid or not.
 			gridLineColor: '#cccccc',    // Color of the grid lines.
 			background: '#fff',      // CSS color spec for background color of grid.

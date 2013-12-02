@@ -21,4 +21,8 @@ class App < Sinatra::Base
 		end
 		resp.to_json
 	end
+
+	get URLS[:autocomplete] do
+		handle_autocomplete
+	end
 end
