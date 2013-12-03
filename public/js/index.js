@@ -42,12 +42,12 @@ function get_correlated_categories(item_id, cb, cberror) {
 
 function plotCategories (response) {
 	response.sort( function (a,b) {
-		return b.associated_synsets[0].prob-a.associated_synsets[0].prob;
+		return b.associated_synsets[0].prob*b.count-a.associated_synsets[0].prob*b.count;
 	});
 	response = response.slice(0,10);
 
 	var names  = response.map(function (i) {return i["id"];});
-	var values = response.map(function (i) {return i["ratio_of_visibility"];});
+	var values = response.map(function (i) {return i["ratio_of_visibility"]*100;});
 	plotdiv(names, values);
 }
 
@@ -156,14 +156,14 @@ function plotdiv(categorynames,categoryvalues) {
 			xaxis: {
 				renderer: $.jqplot.CategoryAxisRenderer,
 				ticks: categorynames,
-				label:'Category',
+				label:'Associated categories',
 			},
 			// Pad the y axis just a little so bars can get close to, but
 			// not touch, the grid boundaries.  1.2 is the default padding.
 			yaxis: {
 				pad: 1.05,
-				tickOptions: {formatString: '%d'},
-				label:'Expected Views',
+				tickOptions: {formatString: "%.0f %"},
+				label:'Visibility',
 				labelRenderer: $.jqplot.CanvasAxisLabelRenderer
 			}
 		},
@@ -285,6 +285,8 @@ function pricediv(pricenames,pricevalues) {
  
 }); //end of ready function
 
+var max_color = "#91ef92";
+
 //****************************************
 //***** Generate colors from list*********
 //****************************************
@@ -294,7 +296,7 @@ function colorList(list,type) {
 	$.each(list,function(index,value) {
 		if (value == maxvalue) {
 			if (type=="category") {
-				colors.push("#73C91C");
+				colors.push(max_color);//"#73C91C");
 			} else if (type=="price") {
 				colors.push("#B045E6");
 			}

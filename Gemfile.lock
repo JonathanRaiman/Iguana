@@ -58,6 +58,11 @@ GEM
       activemodel (~> 3.0)
       activesupport (~> 3.0)
       plucky (~> 0.5.2)
+    mongo_mapper_parallel (1.0.9.1)
+      colorize
+      jraiman_progressbar
+      mongo_mapper
+      parallel
     multi_json (1.8.2)
     named_vector (1.0.1)
     nokogiri (1.6.0)
@@ -73,6 +78,7 @@ GEM
     omniauth-oauth (1.0.1)
       oauth
       omniauth (~> 1.0)
+    parallel (0.9.1)
     plucky (0.5.2)
       mongo (~> 1.5)
     r18n-core (1.1.7)
@@ -155,9 +161,11 @@ DEPENDENCIES
   less
   libv8
   mongo_mapper (>= 0.12.0)
+  mongo_mapper_parallel
   named_vector
   omniauth
   omniauth-etsy
+  parallel
   rdf
   rdf-mongo
   rdf-raptor
