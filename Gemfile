@@ -18,6 +18,7 @@ gem "capybara", :group => :development
 gem 'thin'
 gem 'less'
 gem 'mongo_mapper', '>= 0.12.0'
+gem 'mongo_mapper_parallel'
 gem 'omniauth'
 gem 'omniauth-etsy'
 gem 'bson_ext'

@@ -44,9 +44,7 @@ function plotCategories (response) {
 	response.sort( function (a,b) {
 		return b.associated_synsets[0].prob-a.associated_synsets[0].prob;
 	});
-
-	console.log(response);
-	response = response.slice(10,9999999999);
+	response = response.slice(0,10);
 
 	var names  = response.map(function (i) {return i["id"];});
 	var values = response.map(function (i) {return i["ratio_of_visibility"];});
@@ -86,7 +84,6 @@ $('.carousel').on('slide.bs.carousel', function () {
 	$("#span-item").text(item);
 	$("#span-category").text(category);
 	$("#span-price").text(price);
-	
 });
 //****************************************
 //** Type Ahead Functionality ************
@@ -144,7 +141,9 @@ $('.carousel').on('slide.bs.carousel', function () {
 
 //*** Plot the chart div *********************
 
-function plotdiv(categorynames,categoryvalues) { $.jqplot('chartdiv', [categoryvalues], {
+function plotdiv(categorynames,categoryvalues) {
+
+	$.jqplot('chartdiv', [categoryvalues], {
 		seriesDefaults:{
 			renderer:$.jqplot.BarRenderer,
 			rendererOptions: {fillToZero: true, varyBarColor: true,barMargin:2,shadowDepth: 0},
@@ -219,7 +218,8 @@ function plotdiv(categorynames,categoryvalues) { $.jqplot('chartdiv', [categoryv
 	);	 
 };
 
-function pricediv(pricenames,pricevalues) { $.jqplot('pricediv', [pricevalues], {
+function pricediv(pricenames,pricevalues) {
+	$.jqplot('pricediv', [pricevalues], {
         seriesDefaults:{
             renderer:$.jqplot.BarRenderer,
             rendererOptions: {fillToZero: true, varyBarColor: true,barMargin:2,shadowDepth: 0},

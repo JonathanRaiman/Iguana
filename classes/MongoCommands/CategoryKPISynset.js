@@ -70,7 +70,7 @@ function (start, end, _args) {
 		});
 
 		// only keep 100
-		synset_counts.slice(100, 999999999999999999);
+		synset_counts = synset_counts.slice(0, 100);
 
 		return synset_counts;
 
