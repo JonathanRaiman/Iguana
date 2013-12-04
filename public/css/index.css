@@ -20,6 +20,7 @@ a:hover, a:focus {
 	font-family: 'Open Sans', 'Helvetica Neue', Helvetica, sans-serif;
 	font-weight: 800;
 	text-align: left;
+	margin-left: 10px;
 	/*text-shadow: 0 0 3px #000;*/
 }
 .page-header h2 {
@@ -34,6 +35,9 @@ a:hover, a:focus {
 }
 .button-container a {
 	margin: 5px 10px;
+}
+.page-header a {
+	display: none;
 }
 .button-container a {
 	display:inline-block;
