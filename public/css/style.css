@@ -270,10 +270,12 @@ textarea {
   line-height: inherit;
 }
 a {
+  color: #f22755;
   text-decoration: none;
 }
 a:hover,
 a:focus {
+  color: #c10c35;
   text-decoration: underline;
 }
 a:focus {
@@ -6200,10 +6202,6 @@ body {
     margin-top: 120px;
   }
 }
-/* customize the business logic containers */
-.container-gondola {
-  margin-top: 0px;
-}
 /* center the Edge created animations */
 .edge-container {
   margin: 0 auto;
@@ -6211,6 +6209,10 @@ body {
 }
 li > small {
   color: #999999;
+}
+.page-header > h1 > a {
+  text-decoration: none;
+  color: inherit;
 }
 /* them / coloring variables go here */
 body {

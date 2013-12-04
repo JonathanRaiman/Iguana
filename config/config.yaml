@@ -6,15 +6,3 @@ config:
         secret: "uvy09ldman"
     domain: www.iguana.com
     session_secret: zanzibar_499_devils
-    tabs:
-        special_tab:
-            title: "Special Tab"
-            description: "My special tab"
-        price_comparisions:
-            title: P
-            description: ""
-        linked_data:
-            title: Technology
-            description: |
-              We use <b>Linked Data</b> to promote data open-ness and ease-of-access and extensibility. Furthermore we are interested
-              in seeing mashups of pricing data with other datasets to detect other kinds of correlations.

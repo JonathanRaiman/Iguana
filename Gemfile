@@ -26,10 +26,14 @@ gem 'warden'
 gem 'etsy'
 gem 'jraiman_progressbar'
 gem 'libv8'
+gem 'linkeddata'
+gem 'sparql'
+gem 'equivalent-xml'
 
 # for rdf stuff:
 gem "rdf"
-gem 'rdf-mongo'
+gem "rdf-rdfa"
+gem 'rdf-mongo', :git => 'git://github.com/gkellogg/rdf-mongo.git'
 gem "rdf-raptor"
 gem 'named_vector'
 gem "parallel"
