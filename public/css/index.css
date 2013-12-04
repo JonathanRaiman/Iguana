@@ -36,9 +36,6 @@ a:hover, a:focus {
 .button-container a {
 	margin: 5px 10px;
 }
-.page-header a {
-	display: none;
-}
 .button-container a {
 	display:inline-block;
 }
