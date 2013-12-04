@@ -12,8 +12,8 @@ var item = '';
 
 
 // <Prebaked data>
-var categorynames = ['July', 'August','May', 'June', 'July', 'August','May', 'June', 'July', 'August','May', 'June', 'July', 'August','May', 'June', 'July', 'August','May', 'June', 'July', 'August'];
-var categoryvalues = [200, 600, 700, 1010,200, 600, 700, 1000, 200, 600, 700, 1000,200, 600, 700, 1000,200, 600, 700, 1010,200, 600, 700, 1000, 200, 600, 700, 1000,200, 600, 700, 1000,200, 600, 700, 1010,200, 600, 700, 1000, 200, 600, 700, 1000,200, 600, 700, 1000];
+var categorynames = ['Handmade', 'Vintage','Craft', 'Stone Jewelry', 'Bracelets','Birthstones', 'iPhone Jewelry', 'Belly Button Jewelry','Luxury'];
+var categoryvalues = [200, 600, 700, 1010,200, 600, 700, 1000, 200];
 var pricenames = ['$1-10','$11-20','$21-30','$31-40','$41-50'];
 var pricevalues = [200, 600, 700, 1010,200];
 // </Prebaked data>

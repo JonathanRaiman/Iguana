@@ -73,6 +73,7 @@ GEM
     omniauth-oauth (1.0.1)
       oauth
       omniauth (~> 1.0)
+    parallel (0.9.1)
     plucky (0.5.2)
       mongo (~> 1.5)
     r18n-core (1.1.7)
@@ -158,6 +159,7 @@ DEPENDENCIES
   named_vector
   omniauth
   omniauth-etsy
+  parallel
   rdf
   rdf-mongo
   rdf-raptor
