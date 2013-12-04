@@ -44,15 +44,24 @@ module ShopSearchMethods
 			[total, total_views]
 		end
 
-		def listings_with_words words
+		def listings_with_words words, opts={}
 			found = []
-			Shop.find_each(:"$or" => [
-				{:"listings.tags" => words},
-				{:"listings.category_path" => words}
-				]) do |shop|
+			search_opts = {:"$or" =>words.map {|word| [{:"listings.tags" => word}, {:"listings.category_path" => word}]}.flatten}
+			search_opts.merge!(opts)
+			Shop.find_each(search_opts) do |shop|
 				found += shop.listings_with_words(words)
 			end
 			found
+		end
+
+		def each_listings_with_words words, opts={}
+			search_opts = {:"$or" =>words.map {|word| [{:"listings.tags" => word}, {:"listings.category_path" => word}]}.flatten}
+			search_opts.merge!(opts)
+			Shop.find_each(search_opts) do |shop|
+				shop.listings_with_words(words).each do |listing|
+					yield(listing,shop)
+				end
+			end
 		end
 
 		def find_all_listing_for_category category

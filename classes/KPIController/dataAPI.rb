@@ -38,17 +38,17 @@ module Sinatra
 			@types.each do |type|
 				resp[:series][type["name"].to_sym] = {
 					type: type["name"],
-					data: hists[type["name"].to_sym].histogram,
-					fork_size: hists[type["name"].to_sym].fork_size,
-					min_value: hists[type["name"].to_sym].min_value,
-					max_value: hists[type["name"].to_sym].max_value
+					data: @hists[type["name"].to_sym].histogram,
+					fork_size: @hists[type["name"].to_sym].fork_size,
+					min_value: @hists[type["name"].to_sym].min_value,
+					max_value: @hists[type["name"].to_sym].max_value
 				}
 			end
 			resp.to_json
 		end
 
 		def create_histogram_from_types
-			@hists = @listing_count.histogram :types => @types
+			@hists = @listing_count.histogram :types => @types, :boxes => params[:boxes] ? params[:boxes].to_i : 10
 		end
 
 		def handle_view_stats
