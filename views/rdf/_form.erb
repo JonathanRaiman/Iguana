@@ -1,17 +1,16 @@
+<a href='/' style="color: #008DB2">&larr; Back to Product Search</a>
 <form method="GET" action="/sparql">
 	<div class="row">
-		<div class="col-xs-12">
+		<div class="col-xs-12 sparql">
 			<h3><%= t.write_query_here %></h3>
 			<textarea name="query" class="form-control" rows="5">
 <%=default_sparql_query%></textarea>
-			<p class="navbar-text navbar-right">
-				<select name="format">
+				<input type="submit" value="Search" class="button button-primary"/>
+				<select name="format" class="form-control" >
 					<% sparql_valid_formats.each do |format| %>
 					<option value="<%= format %>"<%= format == "html" ? ' selected' : ''%>><%= format.upcase %></option>
 					<% end %>
 				</select>
-				<input type="submit" value="Search" class="btn btn-primary"/>
-			</p>
 		</div>
 	</div>
 </form>

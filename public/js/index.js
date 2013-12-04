@@ -9,7 +9,7 @@ String.prototype.capitalize=function(){
 var category = '';
 var price = '';
 var item = '';
-
+var itemval = '';
 
 // <Prebaked data>
 var categorynames = ['Handmade', 'Vintage','Craft', 'Stone Jewelry', 'Bracelets','Birthstones', 'iPhone Jewelry', 'Belly Button Jewelry','Luxury'];
@@ -56,6 +56,7 @@ function plotCategories (response) {
 //****************************************
 function onAutocompleted($e, datum) {
 	item = datum._id;
+	itemval = datum.value; 
 	$('.carousel').carousel(1);
 	$("#button2").removeClass("inactive");
 	$("#button2").attr("data-target","#myCarousel");
@@ -81,7 +82,7 @@ $('.carousel').on('slid.bs.carousel', function () {
 	},30);
 });
 $('.carousel').on('slide.bs.carousel', function () {
-	$("#span-item").text(item);
+	$("#span-item").text(itemval);
 	$("#span-category").text(category);
 	$("#span-price").text(price);
 });
@@ -142,7 +143,7 @@ $('.carousel').on('slide.bs.carousel', function () {
 //*** Plot the chart div *********************
 
 function plotdiv(categorynames,categoryvalues) {
-
+	$("#chartdiv").empty();
 	$.jqplot('chartdiv', [categoryvalues], {
 		seriesDefaults:{
 			renderer:$.jqplot.BarRenderer,
@@ -219,6 +220,7 @@ function plotdiv(categorynames,categoryvalues) {
 };
 
 function pricediv(pricenames,pricevalues) {
+	$("#pricediv").empty();
 	$.jqplot('pricediv', [pricevalues], {
         seriesDefaults:{
             renderer:$.jqplot.BarRenderer,
