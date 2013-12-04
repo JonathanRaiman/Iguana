@@ -17,7 +17,8 @@ class App < Sinatra::Base
 		:old_data             => "/old_data.json",
 		:autocomplete         => "/search.json",
 		:sparql               => "/sparql/?",
-		:sparql_form          => "/sparql_form/?"
+		:sparql_form          => "/sparql_form/?",
+		:ontology             => "/ontology/?"
 	}
 	before {session[:locale]||= "en"}
 
