@@ -13,16 +13,16 @@ task :less do
 	File.open("#{App.root}/public/css/style.css", 'w') {|f| f.write(css) }
 end
 
-desc 'Import Etsy seller data'
+desc 'Import new Etsy seller data (limit, offset)'
 task :etsy, :offset, :limit do |t, args|
 	require './app'
 	App.obtain_etsy_data :limit => args[:limit].to_i, :offset => args[:offset].to_i
 end
 
-desc 'Extract clusters from data'
-task :extract_clusters do
+desc 'Generate categories and counts'
+task :categories do
 	require './app'
-	App.extract_clusters
+	Category.assemble_categories
 end
 
 desc 'Load new triples'
