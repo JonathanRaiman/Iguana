@@ -14,8 +14,8 @@ var itemval = '';
 // <Prebaked data>
 var categorynames = ['Handmade', 'Vintage','Craft', 'Stone Jewelry', 'Bracelets','Birthstones', 'iPhone Jewelry', 'Belly Button Jewelry','Luxury'];
 var categoryvalues = [200, 600, 700, 1010,200, 600, 700, 1000, 200];
-var pricenames = ['$1-10','$11-20','$21-30','$31-40','$41-50'];
-var pricevalues = [200, 600, 700, 1010,200];
+var pricenames = ['1','2','3','4','5','6','7','8','9','10','11','12','13','14','15','16','17','18','19','20','21','22','23','24','25','26','27','28','29','30','31','32','33','34','35','36','37','38','39','40','41','42','43','44','45'];
+var pricevalues = [30, 20, 50, 60, 150,190, 50, 10,220,30,50, 40, 20, 80,140,90, 20, 50, 200, 19,36, 50, 10,50,40,20, 90, 70, 10,140,30, 20, 50, 60, 40,26, 50, 10,10,20,20, 6, 7,4,3];
 // </Prebaked data>
 
 $(document).ready(function() {
@@ -240,6 +240,7 @@ function pricediv(pricenames,pricevalues) {
             // not touch, the grid boundaries.  1.2 is the default padding.
             yaxis: {
                 pad: 1.05,
+                min: 0,
                 tickOptions: {formatString: '%d'},
                 label:'Expected Views',
                 labelRenderer: $.jqplot.CanvasAxisLabelRenderer
