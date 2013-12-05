@@ -25,6 +25,10 @@ class App < Sinatra::Base
 				(javascript_script_tag "/js/plugins/jqplot.canvasTextRenderer.js"),
 				(javascript_script_tag "/js/plugins/jqplot.canvasAxisLabelRenderer.js"),
 				(javascript_script_tag "/js/typeahead.min.js"),
+				(javascript_script_tag "/js/Tangle/mootools.js"),
+				(javascript_script_tag "/js/Tangle/Tangle.js"),
+				(javascript_script_tag "/js/Tangle/TangleKit.js"),
+				(javascript_script_tag "/js/Tangle/BVTouchable.js"),
 				(javascript_script_tag "/js/index.js")
 			].join("\n")
 		end
