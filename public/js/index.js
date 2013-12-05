@@ -17,6 +17,8 @@ $(document).ready(function() {
 		pricing_title             = "Best price to list your item",
 		pricing_xlabel            = "Price ranges",
 		pricing_ylabel            = "Occurence",
+		pricing_scatter_xlabel    = "Price",
+		pricing_scatter_ylabel    = "Views",
 		pricing_format            = "%d",
 		category_xlabel           = "Associated Categories",
 		category_ylabel           = "Visibility",
@@ -26,7 +28,7 @@ $(document).ready(function() {
 		price_format              = Hogan.compile("${{min_value}} - ${{max_value}}"),
 		histogram_default_boxes   = 50,
 		pricing_min_value_default = 0,
-		pricing_max_value_default = 500,
+		pricing_max_value_default = 150,
 		carousel                  = $(carousel_id),
 		carousel_indicators       = carousel.find(".carousel-indicators"),
 		plots                     = [],
@@ -65,8 +67,6 @@ $(document).ready(function() {
 	        	tangle_model.choices = new_choices;
 	        	tangle_model.choices_length = new_choices.length;
 	        	tangle_model.position = index !== undefined ? index : 0;
-	        	console.log("\""+tangle_model.variable+"\"", new_choices[tangle_model.position]);
-	        	console.log(tangle_model, tangle_model.choices);
 	        	tangle_model.tangle.setValue(tangle_model.variable, new_choices[tangle_model.position]);
 	        }
 	    },
@@ -191,6 +191,16 @@ $(document).ready(function() {
 		});
 	}
 
+	function get_price_view_scatter_plot(item_id, cb, cberror) {
+		// returns a 2D array with price and view as dimensions.
+		return make_api_request({
+			'request_type': 'price_view_scatter',
+			'_id': item_id,
+			'price_min_value': pricing_min_value_default,
+			'price_max_value': pricing_max_value_default
+		}, cb, cberror);
+	}
+
 	function get_correlated_categories(item_id, cb, cberror) {
 		return make_api_request({
 			'request_type':"category_stats",
@@ -203,8 +213,8 @@ $(document).ready(function() {
 			'request_type':"price_stats",
 			'_id': item_id,
 			'boxes': histogram_default_boxes,
-			'min_value': pricing_min_value_default,
-			'max_value': pricing_max_value_default
+			'price_min_value': pricing_min_value_default,
+			'price_max_value': pricing_max_value_default
 		}, cb, cberror);
 	}
 
@@ -259,6 +269,20 @@ $(document).ready(function() {
 		var plot = $("#"+getPlotIDfromEvent(event));
 		var ticks = plot.find(".jqplot-xaxis .jqplot-xaxis-tick");
 		ticks.removeClass("jqplot-xaxis-tick-hovered");
+	}
+
+	function plotPricingScatter (response) {
+		var scatter = response['series'];
+		createPlot("pricediv", {
+			scatter: true,
+			title: pricing_title,
+			hiddenTicks: false,
+			xlabel: pricing_scatter_xlabel,
+			ylabel: pricing_scatter_ylabel,
+			yaxisFormat: pricing_format,
+			xaxisFormat: '$%.0f',
+			values: response['series']
+		}, saveClickedScatterPrice);
 	}
 
 	function plotPricing (response) {
@@ -433,16 +457,94 @@ $(document).ready(function() {
 			seriesDefaults:{
 				renderer:$.jqplot.BarRenderer,
 				rendererOptions: {fillToZero: true, varyBarColor: true,barMargin:2,shadowDepth: 0},
-				color: '#73C91C'
+				color: default_color
 			},
 			title: _args["title"],
 			seriesColors: _args["highlight_bin"] !== undefined ? colorList(_args["values"],_args["highlight_bin"]) : colorList(_args["values"]),
 			axes: {
 				// Use a category axis on the x axis and use our custom ticks.
 				xaxis: {
+					min: 0,
 					renderer: $.jqplot.CategoryAxisRenderer,
 					ticks: _args["labels"],
 					label:_args["xlabel"],
+					tickOptions: _args["xaxisFormat"] ? {formatString: _args["xaxisFormat"] || '%d'} : {},
+				},
+				// Pad the y axis just a little so bars can get close to, but
+				// not touch, the grid boundaries.  1.2 is the default padding.
+				yaxis: {
+					pad: 1.05,
+					min: 0,
+					tickOptions: {formatString: _args["yaxisFormat"] || '%d'},
+					label:_args["ylabel"],
+					labelRenderer: $.jqplot.CanvasAxisLabelRenderer
+				}
+			},
+			grid: {
+				drawGridLines: true,        // whether to draw lines across the grid or not.
+				gridLineColor: '#cccccc',    // Color of the grid lines.
+				background: 'transparent',      // CSS color spec for background color of grid.
+				borderColor: '#ccc',     // CSS color spec for border around grid.
+				borderWidth: 2.0,           // pixel width of border around grid.
+				shadow: false,               // draw a shadow for grid.
+				renderer: $.jqplot.CanvasGridRenderer,  // renderer to use to draw the grid.
+				rendererOptions: {
+					barPadding: 0,      // number of pixels between adjacent bars in the same
+					barMargin: 0,      // number of pixels between adjacent groups of bars.
+					barDirection: 'vertical', // vertical or horizontal.
+					barWidth: null,     // width of the bars.  null to calculate automatically.
+					shadowOffset: 2,    // offset from the bar edge to stroke the shadow.
+					shadowDepth: 5,     // nuber of strokes to make for the shadow.
+					shadowAlpha: 0.8,   // transparency of the shadow.
+				}
+			}
+		});
+		//*** Have a hover effect with the cursor and grab a bar click ************
+
+		plot.bind('jqplotDataHighlight',
+			function (ev, seriesIndex, pointIndex, data) {
+				$(this).css('cursor','pointer');
+				if (hover_cb)
+					hover_cb(ev, seriesIndex, pointIndex, data);
+			}
+		);
+		if (click_cb)
+			plot.bind('jqplotDataClick', click_cb);
+		plot.bind('jqplotDataUnhighlight',
+			function (ev, seriesIndex, pointIndex, data) {
+				$(this).css('cursor','default');
+				if (unhover_cb)
+					unhover_cb(ev, seriesIndex, pointIndex, data);
+			}
+		);
+		var max_index = _args["highlight_bin"] !== undefined ? _args["highlight_bin"] : _args["values"].indexOf(Math.max.apply(Math,_args["values"]));
+		var ticks = plot.find(".jqplot-xaxis .jqplot-xaxis-tick");
+		if (_args["hiddenTicks"])
+			ticks.addClass("jqplot-xaxis-tick-hidden");
+		var max_tick = $(ticks[max_index]);
+		max_tick.addClass("jqplot-xaxis-tick-max");
+		plot.find(".jqplot-xaxis-label").css("position", "relative");
+
+	}
+
+	function createPlot(id, _args, click_cb, hover_cb, unhover_cb) {
+		var plot = $("#"+id);
+		if (plots[id]) plots[id].destroy();
+		plots[id] = $.jqplot(id, [_args["values"]], {
+			seriesDefaults: _args.scatter ? {} : {
+				renderer:$.jqplot.BarRenderer,
+				rendererOptions: {fillToZero: true, varyBarColor: true,barMargin:2,shadowDepth: 0},
+				color: '#73C91C'
+			},
+			series: _args.scatter ? [{showLine: false, markerOptions: {size: 4, style: "circle"}}] : [],
+			title: _args["title"],
+			seriesColors: _args.scatter ? undefined : (_args["highlight_bin"] !== undefined ? colorList(_args["values"],_args["highlight_bin"]) : colorList(_args["values"])),
+			axes: {
+				// Use a category axis on the x axis and use our custom ticks.
+				xaxis: {
+					renderer: _args.scatter ? undefined : $.jqplot.CategoryAxisRenderer,
+					ticks: _args.scatter ? undefined : _args["labels"],
+					label: _args["xlabel"],
 				},
 				// Pad the y axis just a little so bars can get close to, but
 				// not touch, the grid boundaries.  1.2 is the default padding.
@@ -551,8 +653,14 @@ $(document).ready(function() {
 		// slide to next carousel
 		slide_to_carousel(3);
 		activate_carousel_buttons(3);
-
+		// get_price_view_scatter_plot(item._id, plotPricingScatter, displayDefaultPricing);
 		get_pricing_information(item._id, plotPricing, displayDefaultPricing);
+	}
+
+	function saveClickedScatterPrice (ev, seriesIndex, pointIndex, data) {
+		price = price_format.render({"min_value": data[0], "max_value": data[0]});
+		slide_to_carousel(4);
+		activate_carousel_buttons(4);
 	}
 
 	function saveClickedPrice (ev, seriesIndex, pointIndex, data) {

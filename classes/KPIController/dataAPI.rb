@@ -6,6 +6,8 @@ module Sinatra
 				handle_category_stats
 			when "price_stats"
 				handle_price_stats
+			when "price_view_scatter"
+				handle_price_view_scatter
 			when "view_stats"
 				handle_view_stats
 			else
@@ -28,6 +30,13 @@ module Sinatra
 		def find_correlated_categories_and_return
 			categories = @listing_count.correlated_categories_score_only
 			categories.to_json
+		end
+
+		def return_scatter_plot
+			{
+				category: params[:_id],
+				series: @scatter_plot
+			}.to_json
 		end
 
 		def return_histograms
@@ -53,6 +62,21 @@ module Sinatra
 			@hists = @listing_count.histogram :types => @types, :boxes => params[:boxes] ? params[:boxes].to_i : 10
 		end
 
+		def create_scatter_plot_from_types
+			@scatter_plot = @listing_count.scatter_plot :types => @types
+		end
+
+		def handle_price_view_scatter
+			if find_ListingCount
+				# x, y
+				@types = [create_type_from_request("price"), create_type_from_request("views")]
+				create_scatter_plot_from_types
+				return_scatter_plot
+			else
+				handle_bad_request
+			end
+		end
+
 		def handle_view_stats
 			if find_ListingCount
 				@types = [create_type_from_request("views")]
@@ -65,8 +89,8 @@ module Sinatra
 
 		def create_type_from_request name
 			type = {"name" => name}
-			if !params["min_value"].nil? then type.merge!({"min_value" => params["min_value"].to_f}) end
-			if !params["max_value"].nil? then type.merge!({"max_value" => params["max_value"].to_f}) end
+			if !params["#{name}_min_value"].nil? then type.merge!({"min_value" => params["#{name}_min_value"].to_f}) end
+			if !params["#{name}_max_value"].nil? then type.merge!({"max_value" => params["#{name}_max_value"].to_f}) end
 			type
 		end
 

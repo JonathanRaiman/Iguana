@@ -61,6 +61,28 @@ class Listing
 			end
 		end
 
+		def scatter_plot(opts={})
+			# type-dimensional array of values.
+			scatter = []
+			each_listing do |listing, shop|
+				point = []
+				out_of_bounds = false
+				opts[:types].each do |type|
+					val = listing.send(type["name"].to_sym).to_f
+					if (!type["min_value"].nil? and val > type["min_value"]) or !type["min_value"]
+						if (!type["max_value"].nil? and val < type["max_value"]) or !type["max_value"]
+							point << val
+						else
+							out_of_bounds = true
+						end
+					end
+				end
+				if out_of_bounds then next
+				else scatter << point end
+			end
+			scatter
+		end
+
 		def histogram(opts={})
 			hists = {}
 			opts[:types].each do |type|
