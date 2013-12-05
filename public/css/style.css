@@ -6339,23 +6339,24 @@ div.jqplot-xaxis-label {
 }
 /* TKToggle */
 .TKToggle {
-  color: #46f;
-  border-bottom: 1px dashed #46f;
+  color: #fd1c4f;
+  border-bottom: 1px dashed #fd1c4f;
   cursor: pointer;
 }
 /* TKAdjustableNumber */
-.TKAdjustableNumber {
+.TKAdjustableNumber,
+.TKAdjustableSelect {
   position: relative;
-  color: #46f;
-  border-bottom: 1px dashed #46f;
+  color: #fd1c4f;
+  border-bottom: 1px dashed #fd1c4f;
 }
 .TKAdjustableNumberDown {
-  color: #00c;
-  border-bottom: 1px dashed #00c;
+  color: #e40235;
+  border-bottom: 1px dashed #e40235;
 }
 .TKAdjustableNumberHelp {
   position: absolute;
-  color: #00f;
+  color: #e40235;
   font: 9px "Helvetica-Neue", "Arial", sans-serif;
 }
 /* them / coloring variables go here */

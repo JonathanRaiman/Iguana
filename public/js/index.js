@@ -8,8 +8,7 @@ String.prototype.capitalize=function(){
 
 $(document).ready(function() {
 
-	var category                  = '',
-		price                     = "$0 - $0",
+	var price                     = "$0 - $0",
 		mean_price                = 0.0,
 		item                      = {},
 		itemval                   = '',
@@ -37,15 +36,135 @@ $(document).ready(function() {
 		activated_buttons         = 0,
 		tangle;
 
+	Tangle.formats.preciseDollars = function (value) {
+		return "$" + value.toFixed(2);
+	};
+
+	var isAnyAdjustableNumberDragging = false;
+
+	Tangle.classes.TKAdjustableSelect = {
+
+	    initialize: function (element, options, tangle, variable) {
+	        this.element = element;
+	        this.tangle = tangle;
+	        this.variable = variable;
+
+			this.position       = (options.position !== undefined) ? parseInt(options.position)  : 0;
+			
+			this.choices        = (options.choices  !== undefined) ? JSON.parse(options.choices) : [];
+			this.step           = (options.step     !== undefined) ? parseInt(options.step)      : 1;
+			this.choices_length = (options.choices  !== undefined) ? this.choices.length         : 1;
+	        
+	        this.initializeHover();
+	        this.initializeHelp();
+	        this.initializeDrag();
+
+	        var tangle_model = this;
+
+	        this.element.setChoices = function (new_choices, index) {
+	        	tangle_model.choices = new_choices;
+	        	tangle_model.choices_length = new_choices.length;
+	        	tangle_model.position = index !== undefined ? index : 0;
+	        	console.log("\""+tangle_model.variable+"\"", new_choices[tangle_model.position]);
+	        	console.log(tangle_model, tangle_model.choices);
+	        	tangle_model.tangle.setValue(tangle_model.variable, new_choices[tangle_model.position]);
+	        }
+	    },
+
+
+	    // hover
+	    
+	    initializeHover: function () {
+	        this.isHovering = false;
+	        this.element.addEvent("mouseenter", (function () { this.isHovering = true;  this.updateRolloverEffects(); }).bind(this));
+	        this.element.addEvent("mouseleave", (function () { this.isHovering = false; this.updateRolloverEffects(); }).bind(this));
+	    },
+	    
+	    updateRolloverEffects: function () {
+	        this.updateStyle();
+	        this.updateCursor();
+	        this.updateHelp();
+	    },
+	    
+	    isActive: function () {
+	        return this.isDragging || (this.isHovering && !isAnyAdjustableNumberDragging);
+	    },
+
+	    updateStyle: function () {
+	        if (this.isDragging) { this.element.addClass("TKAdjustableNumberDown"); }
+	        else { this.element.removeClass("TKAdjustableNumberDown"); }
+	        
+	        if (!this.isDragging && this.isActive()) { this.element.addClass("TKAdjustableNumberHover"); }
+	        else { this.element.removeClass("TKAdjustableNumberHover"); }
+	    },
+
+	    updateCursor: function () {
+	        var body = document.getElement("body");
+	        if (this.isActive()) { body.addClass("TKCursorDragHorizontal"); }
+	        else { body.removeClass("TKCursorDragHorizontal"); }
+	    },
+
+
+	    // help
+
+	    initializeHelp: function () {
+	        this.helpElement = (new Element("div", { "class": "TKAdjustableNumberHelp" })).inject(this.element, "top");
+	        this.helpElement.setStyle("display", "none");
+	        this.helpElement.set("text", "drag");
+	    },
+	    
+	    updateHelp: function () {
+	        var size = this.element.getSize();
+	        var top = -size.y + 7;
+	        var left = Math.round(0.5 * (size.x - 20));
+	        var display = (this.isHovering && !isAnyAdjustableNumberDragging) ? "block" : "none";
+	        this.helpElement.setStyles({ left:left, top:top, display:display });
+	    },
+
+
+	    // drag
+	    
+	    initializeDrag: function () {
+	        this.isDragging = false;
+	        new BVTouchable(this.element, this);
+	    },
+	    
+	    touchDidGoDown: function (touches) {
+	        this.positionAtMouseDown = this.choices.indexOf(this.tangle.getValue(this.variable));
+	        this.isDragging = true;
+	        isAnyAdjustableNumberDragging = true;
+	        this.updateRolloverEffects();
+	        this.updateStyle();
+	    },
+	    
+	    touchDidMove: function (touches) {
+	        var value = this.positionAtMouseDown + touches.translation.x / 5 * this.step;
+	        value = ((value / this.step).round() * this.step) % this.choices_length;
+	        value = value < 0 ? value + this.choices_length : value;
+	        this.tangle.setValue(this.variable, this.choices[value]);
+	        this.updateHelp();
+	    },
+	    
+	    touchDidGoUp: function (touches) {
+	        this.isDragging = false;
+	        isAnyAdjustableNumberDragging = false;
+	        this.updateRolloverEffects();
+	        this.updateStyle();
+	        this.helpElement.setStyle("display", touches.wasTap ? "block" : "none");
+	    }
+	};
+
 	tangle = new Tangle($(".summary_page")[0], {
 			initialize: function () {
 				this.price = 0.0;
+				this.item = "item";
+				this.category = "category";
 				this.visibility = 1;
 				this.above_average_price = 0.0;
 			},
 			update: function () {
 				// inexact science:
-				this.above_average_price = (this.price - mean_price).toFixed(2);
+				this.above_average_price = this.price - mean_price;
 				this.visibility = Math.max(1,(600*Math.pow(2.7182818285, -(Math.abs(mean_price-this.price)/15)*0.3)).toFixed(2));
 			}
 	});
@@ -183,10 +302,14 @@ $(document).ready(function() {
 		return (parseFloat(matches[1])+parseFloat(matches[2]))/2.0;
 	}
 
+	function updateCategoryDecision(categories, index) {
+		$("#span-category")[0].setChoices(categories, index);
+	}
+
 	function updateFinalSlideInfo () {
 		tangle.setValue("price",newMidPrice(price));
-		$("#span-category").text(category);
-		$("#span-item").text(itemval);
+		$("#span-item")[0].setChoices(item.tokens);
+		tangle.setValue("item", itemval);
 	}
 
 	carousel.carousel({
@@ -255,7 +378,7 @@ $(document).ready(function() {
 		function processResponse (response) {
 			var processResult = function (result) {
 				var processed_tokens = processDuplicateTokens(result.tokens);
-				return {count: result.count, tokens:processed_tokens, value: processed_tokens.join(", "), words: processed_tokens.join(", "), _id: result._id};
+				return {count: result.count, tokens:processed_tokens, value: pickedTokenFromTokens(processed_tokens, $(".typeahead").val()), words: processed_tokens.join(", "), _id: result._id};
 			};
 			return response.results.map(processResult);
 		}
@@ -423,7 +546,8 @@ $(document).ready(function() {
 	function saveClickedCategory (ev, seriesIndex, pointIndex, data) {
 		// store category
 		var labels = getLabelsFromPlot(getPlotFromClick(ev));
-		category = labels[pointIndex];
+
+		updateCategoryDecision(labels, pointIndex);
 		// slide to next carousel
 		slide_to_carousel(3);
 		activate_carousel_buttons(3);

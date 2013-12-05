@@ -20,30 +20,34 @@
 /* TKToggle */
 
 .TKToggle {
-	color: #46f;
-	border-bottom: 1px dashed #46f;
+	color: @tangle_color;
+	border-bottom: 1px dashed @tangle_color;
 	cursor: pointer;
 }
 
 
 /* TKAdjustableNumber */
 
-.TKAdjustableNumber {
+.TKAdjustableNumber, .TKAdjustableSelect {
 	position:relative;
-	color: #46f;
-	border-bottom: 1px dashed #46f;
+	color: @tangle_color;
+	border-bottom: 1px dashed @tangle_color;
 }
 
 .TKAdjustableNumberHover {
 }
 
 .TKAdjustableNumberDown {
-	color: #00c;
-	border-bottom: 1px dashed #00c;
+	color: @tangle_color_mousedown;
+	border-bottom: 1px dashed @tangle_color_mousedown;
 }
 
 .TKAdjustableNumberHelp {
 	position:absolute;
-	color: #00f;
+	color: @tangle_color_help;
 	font: 9px "Helvetica-Neue", "Arial", sans-serif;
 }
+
+@tangle_color: #46f;
+@tangle_color_mousedown: #00c;
+@tangle_color_help: #00f;

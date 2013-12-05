@@ -2,12 +2,17 @@
 	<div class="col-lg-10 offset-lg-1 text-center">
 		<h3>Plan</h3>
 		<p>
-			I'm selling a <span id="span-item" class="choices">item</span> in the category <span id="span-category" class="choices">of Etsy</span> with a price of $<span id="span-price" data-var="price" class="choices TKAdjustableNumber" data-min="0" data-max="99999999999"></span>
+			I'm selling a 
+			<span id="span-item" class="choices TKAdjustableSelect" data-var="item" data-choices='["item"]'></span>
+			 in the category 
+			<span id="span-category" class="choices TKAdjustableSelect" data-var="category" data-choices='["category"]'></span>
+			 of Etsy with a price of 
+			<span id="span-price" data-var="price" class="choices TKAdjustableNumber" data-min="0" data-format="preciseDollars" data-step="0.1"></span>.
 		</p>
 		<p>
 			<strong>Estimated visibility</strong> is <span data-var="visibility"> views</span>.
 			<br/>
-			<strong>Price</strong> is $<span data-var="above_average_price"></span> away from average.
+			<strong>Price</strong> is <span data-var="above_average_price" data-format="preciseDollars"></span> away from average.
 		</p>
 		<div class="text-center">
 			<span class="button-wrap">
