@@ -80,7 +80,8 @@ class Listing
 				if out_of_bounds then next
 				else scatter << point end
 			end
-			scatter
+
+			return scatter
 		end
 
 		def histogram(opts={})

@@ -36,6 +36,7 @@ $(document).ready(function() {
 		default_color             = "#e8989a",
 		max_categories_shown      = 10,
 		activated_buttons         = 0,
+		pricing_formatType_select = $("select[name='plotType']"),
 		tangle;
 
 	Tangle.formats.preciseDollars = function (value) {
@@ -169,6 +170,10 @@ $(document).ready(function() {
 			}
 	});
 
+	function pricingUsesScatter () {
+		return pricing_formatType_select.val() == "scatter";
+	}
+
 	function slide_to_carousel (num) {
 		carousel.carousel(num-1);
 	}
@@ -271,8 +276,24 @@ $(document).ready(function() {
 		ticks.removeClass("jqplot-xaxis-tick-hovered");
 	}
 
+	function getMean( array, dimension) {
+		var sum = 0.0,
+			array_length = array.length
+		for (var i=0;i<array_length;i++) {
+			if (dimension !== undefined) {
+				sum += array[i][dimension];
+			} else {
+				sum += array[i];
+			}
+		}
+		return sum / array_length;
+	}
+
 	function plotPricingScatter (response) {
 		var scatter = response['series'];
+
+		mean_price = getMean(response['series'],0);
+
 		createPlot("pricediv", {
 			scatter: true,
 			title: pricing_title,
@@ -371,7 +392,8 @@ $(document).ready(function() {
 			left_carousel_controls_visibily(false);
 			if (active_slide_number < activated_buttons) {
 				right_carousel_controls_visibily(true);
-			} else if (active_slide_number > 0){
+			}
+			if (active_slide_number > 0) {
 				left_carousel_controls_visibily(true);
 			}
 		},30);
@@ -536,7 +558,7 @@ $(document).ready(function() {
 				rendererOptions: {fillToZero: true, varyBarColor: true,barMargin:2,shadowDepth: 0},
 				color: '#73C91C'
 			},
-			series: _args.scatter ? [{showLine: false, markerOptions: {size: 4, style: "circle"}}] : [],
+			series: _args.scatter ? [{showLine: false, markerOptions: {size: 4, style: "filledCircle", color: default_color}}] : [],
 			title: _args["title"],
 			seriesColors: _args.scatter ? undefined : (_args["highlight_bin"] !== undefined ? colorList(_args["values"],_args["highlight_bin"]) : colorList(_args["values"])),
 			axes: {
@@ -644,6 +666,16 @@ $(document).ready(function() {
 		}, saveClickedPrice);
 	}
 
+	function redrawPricingPlots () {
+		if (pricingUsesScatter()){
+			get_price_view_scatter_plot(item._id, plotPricingScatter, displayDefaultPricing);
+		} else {
+			get_pricing_information(item._id, plotPricing, displayDefaultPricing);
+		}
+	}
+
+	pricing_formatType_select.bind("change", redrawPricingPlots);
+
 
 	function saveClickedCategory (ev, seriesIndex, pointIndex, data) {
 		// store category
@@ -653,8 +685,7 @@ $(document).ready(function() {
 		// slide to next carousel
 		slide_to_carousel(3);
 		activate_carousel_buttons(3);
-		// get_price_view_scatter_plot(item._id, plotPricingScatter, displayDefaultPricing);
-		get_pricing_information(item._id, plotPricing, displayDefaultPricing);
+		redrawPricingPlots();
 	}
 
 	function saveClickedScatterPrice (ev, seriesIndex, pointIndex, data) {
