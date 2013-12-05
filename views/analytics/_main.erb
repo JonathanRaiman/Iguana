@@ -72,37 +72,6 @@
 }
 .carousel .item .container {
 }
-#introslide {
-	padding-top: 220px;
-	text-align: center;
-}
-#introslide .container #sellspan {
-	display: inline-block;
-	text-align: center;
-}
-#introslide h2, #introslide input{
-	font-family: 'Open-sans', Helvetica, sans-serif;
-	font-size: 44px;
-	font-weight: 800;
-	vertical-align: top;
-}
-#introslide h2 {
-	display:inline-block;
-	margin-top: 0px;
-	color: #2b2b2b;
-  	/*text-shadow: 3px 3px 0px rgba(0,0,0,0.1), 7px 7px 0px rgba(0,0,0,0.05);*/
-}
-#introslide input {
-	display: inline-block;
-	width: 400px;
-	margin-left: 30px;
-	background: none;
-	border: none;
-	border-bottom: 2px solid #e72d47;
-	margin-top:-5px;
-	color: #e72d47;
-	outline: none;
-}
 .carousel-control .glyphicon-chevron-right, .carousel-control .glyphicon-chevron-left {
 	text-shadow: none;
 }
@@ -151,15 +120,15 @@
 			<span class="hidden-xs"><span class="badge">1</span> <%= t.item_select %></span>
 			<span class="visible-xs hidden-sm hidden-md hidden-lg">1</span>
 		</li>
-		<li id="button2" data-target="" data-slide-to="1" class="inactive">
+		<li data-target="" data-slide-to="1" class="inactive">
 			<span class="hidden-xs"><span class="badge">2</span> <%= t.category%></span>
 			<span class="visible-xs hidden-sm hidden-md hidden-lg">2</span>
 		</li>
-		<li id="button3" data-target="" data-slide-to="2" class="inactive">
+		<li data-target="" data-slide-to="2" class="inactive">
 			<span class="hidden-xs"><span class="badge">3</span> <%= t.price %></span>
 			<span class="visible-xs hidden-sm hidden-md hidden-lg">3</span>
 		</li>
-		<li id="button4" data-target="" data-slide-to="3" class="inactive">
+		<li data-target="" data-slide-to="3" class="inactive">
 			<span class="hidden-xs"><span class="badge">4</span> <%= t.summary %></span>
 			<span class="visible-xs hidden-sm hidden-md hidden-lg">4</span>
 		</li>
@@ -180,7 +149,6 @@
 			</div>
 		</div>
 		<div class="item">
-			<img src="" alt="">
 			<div class="container">
 				<div class="row">
 				  <div class="col-md-12">
@@ -191,10 +159,7 @@
 		</div>
 		<div class="item">
 			<div class="container">
-				<div class="carousel-caption">
-					<h4 id="summary-text">I'm selling a <span id="span-item">item</span> in the category <span id="span-category">of Etsy</span> in the price range of <span id="span-price">all prices</span></h4>
-					<span class="button-wrap"><a href="http://www.etsy.com" class="button button-circle button-highlight">List Item</a></span>
-				</div>
+				<%= erb :"analytics/_summary" %>
 			</div>
 		</div>
 	</div>

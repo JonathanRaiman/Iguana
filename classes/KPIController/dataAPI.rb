@@ -39,6 +39,8 @@ module Sinatra
 				resp[:series][type["name"].to_sym] = {
 					type: type["name"],
 					data: @hists[type["name"].to_sym].histogram,
+					mean: @hists[type["name"].to_sym].mean,
+					mean_position: @hists[type["name"].to_sym].mean_box,
 					fork_size: @hists[type["name"].to_sym].fork_size,
 					min_value: @hists[type["name"].to_sym].min_value,
 					max_value: @hists[type["name"].to_sym].max_value

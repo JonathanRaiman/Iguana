@@ -121,6 +121,38 @@ body {
 
 }
 
+/* INTROSLIDE  TYPEAHEAD */
+#introslide {
+	padding-top: 220px;
+	text-align: center;
+}
+#introslide .container #sellspan {
+	display: inline-block;
+	text-align: center;
+}
+#introslide h2, #introslide input{
+	font-family: 'Open-sans', Helvetica, sans-serif;
+	font-size: 44px;
+	font-weight: 800;
+	vertical-align: top;
+}
+#introslide h2 {
+	display:inline-block;
+	margin-top: 0px;
+	color: @dark_gray;
+}
+#introslide input {
+	display: inline-block;
+	width: 400px;
+	margin-left: 30px;
+	background: none;
+	border: none;
+	border-bottom: 2px solid @typeahead_input;
+	margin-top:-5px;
+	color: @typeahead_input;
+	outline: none;
+}
+
 
 /* RESPONSIVE CSS
 -------------------------------------------------- */
@@ -211,4 +243,59 @@ article p {
 	font-size: 13px;
 	line-height: 19px;
 	color: @article_body_color;
+}
+
+article.summary_page p {
+	font-size: 24px;
+	line-height: 32px;
+}
+article.summary_page h3, article.summary_page h4, article.summary_page h5 {
+	font-size: 32px;
+	line-height: 35px;
+}
+
+.jqplot-xaxis-tick {
+	transition: all 0.2s linear;
+	-moz-transition: all 0.2s linear;    /* FF3.7+ */
+	-o-transition: all 0.2s linear;      /* Opera 10.5 */
+	-webkit-transition: all 0.2s linear; /* Saf3.2+, Chrome */
+}
+.jqplot-xaxis-tick-hidden{
+	opacity: 0;
+}
+.jqplot-xaxis-tick.jqplot-xaxis-tick-hidden:hover,
+.jqplot-xaxis-tick-hovered,
+.jqplot-xaxis-tick-hovered.jqplot-xaxis-tick-hidden {
+	opacity: 1;
+}
+.jqplot-xaxis-tick-hidden.jqplot-xaxis-tick.jqplot-xaxis-tick-max,
+.jqplot-xaxis-tick.jqplot-xaxis-tick-max {
+	opacity: 1;
+	color: @max_tick_color;
+	font-weight: bold;
+}
+.jqplot-xaxis-tick-max:before {
+	content: "";
+	position: relative;
+	top: 0;
+	left: 50%;
+	display: block;
+	background: @max_tick_stem_color;
+	width: 1px;
+	height: @max_tick_stem_height;
+}
+.carousel-inner {
+	overflow: visible;
+}
+div.jqplot-xaxis-label {
+	position: relative !important;
+	margin-left:auto;
+	margin-right: auto;
+	display: block;
+	text-align: center;
+	margin-top: 50px;
+}
+.selected-synset {
+	color: @select_synset_color;
+	letter-spacing: -1.2px;
 }
