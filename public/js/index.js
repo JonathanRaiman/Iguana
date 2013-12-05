@@ -9,7 +9,8 @@ String.prototype.capitalize=function(){
 $(document).ready(function() {
 
 	var category                  = '',
-		price                     = '',
+		price                     = "$0 - $0",
+		mean_price                = 0.0,
 		item                      = {},
 		itemval                   = '',
 		api_url                   = "/data.json",
@@ -22,6 +23,8 @@ $(document).ready(function() {
 		category_ylabel           = "Visibility",
 		category_title            = "Best categories to list your items",
 		category_format           = "%.0f %",
+		price_regex               = /^\$([^-]+) - \$([^-]+)/,
+		price_format              = Hogan.compile("${{min_value}} - ${{max_value}}"),
 		histogram_default_boxes   = 50,
 		pricing_min_value_default = 0,
 		pricing_max_value_default = 500,
@@ -31,7 +34,21 @@ $(document).ready(function() {
 		max_color                 = "#91ef92",
 		default_color             = "#e8989a",
 		max_categories_shown      = 10,
-		activated_buttons         = 0;
+		activated_buttons         = 0,
+		tangle;
+
+	tangle = new Tangle($(".summary_page")[0], {
+			initialize: function () {
+				this.price = 0.0;
+				this.visibility = 1;
+				this.above_average_price = 0.0;
+			},
+			update: function () {
+				// inexact science:
+				this.above_average_price = (this.price - mean_price).toFixed(2);
+				this.visibility = Math.max(1,(600*Math.pow(2.7182818285, -(Math.abs(mean_price-this.price)/15)*0.3)).toFixed(2));
+			}
+	});
 
 	function slide_to_carousel (num) {
 		carousel.carousel(num-1);
@@ -105,7 +122,9 @@ $(document).ready(function() {
 	function generateBins (width,number) {
 		list = [];
 		for (i = 0; i < width*number; i = i+width) {
-			list.push("$"+i.toFixed(2)+" - $"+(i+width).toFixed(2));
+			list.push(price_format.render({"min_value": i.toFixed(2), "max_value": (i+width).toFixed(2)}));
+
+			// list.push("$"+i.toFixed(2)+" - $"+(i+width).toFixed(2));
 		}
 		return list;
 	}
@@ -126,6 +145,7 @@ $(document).ready(function() {
 	function plotPricing (response) {
 		var price = response['series']['price'];
 		var bin_labels = generateBins(price['fork_size'],price["data"].length);
+		mean_price = price['mean'];
 		createPlot("pricediv", {
 			highlight_bin: price['mean_position'],
 			title: pricing_title,
@@ -158,10 +178,15 @@ $(document).ready(function() {
 		get_correlated_categories(item._id, plotCategories, displayDefaultCategories);
 	}
 
+	function newMidPrice(price_range) {
+		var matches = price_regex.exec(price_range);
+		return (parseFloat(matches[1])+parseFloat(matches[2]))/2.0;
+	}
+
 	function updateFinalSlideInfo () {
-		$("#span-item").text(itemval);
+		tangle.setValue("price",newMidPrice(price));
 		$("#span-category").text(category);
-		$("#span-price").text(price);
+		$("#span-item").text(itemval);
 	}
 
 	carousel.carousel({
