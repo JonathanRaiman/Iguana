@@ -65,8 +65,6 @@ module Sinatra
 		end
 
 		def create_histogram_from_types
-			puts "******"
-			puts @types.inspect
 			@hists = @listing_count.histogram :types => @types, :boxes => params[:boxes] ? params[:boxes].to_i : 10
 		end
 
@@ -76,7 +74,7 @@ module Sinatra
 
 		def handle_price_view_scatter
 			if find_ListingCount
-				# x, y
+				# scatter format is: x, y (thus views per unit price $$ )
 				@types = [create_type_from_request("price"), create_type_from_request("views")]
 				create_scatter_plot_from_types
 				return_scatter_plot

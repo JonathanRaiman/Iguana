@@ -56,7 +56,7 @@ class Listing
 		end
 
 		def each_listing
-			Shop.each_listings_with_words words, {:"listings.wordnet_words" => true} do |listing, shop|
+			Shop.each_listings_with_words(words) do |listing, shop|
 				yield(listing,shop)
 			end
 		end
