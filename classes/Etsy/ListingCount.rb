@@ -90,6 +90,7 @@ class Listing
 				hists[type["name"].to_sym] = Histogram.new(:boxes => opts[:boxes])
 			end
 			each_listing do |listing, shop|
+				puts listing
 				opts[:types].each do |type|
 					val = listing.send(type["name"].to_sym).to_f
 					if (!type["min_value"].nil? and val > type["min_value"]) or !type["min_value"]
