@@ -2,6 +2,23 @@ module RDF
 	module Mongo
 		# The Mongo repository can be extended to support wordsense specific queries we can optimize
 		class Repository < ::RDF::Repository
+
+			def initialize(options = {}, &block)
+				options = {:host => 'localhost', :port => 27017, :db => 'quadb', :collection => 'quads'}.merge(options)
+				@db = ::Mongo::Connection.new(options[:host], options[:port]).db(options[:db])
+				@coll = @db[options[:collection]]
+				if !ENV['MONGOHQ_URL']
+					@coll.create_index("s")
+					@coll.create_index("p")
+					@coll.create_index("o")
+					@coll.create_index("c")
+					@coll.create_index([["s", ::Mongo::ASCENDING], ["p", ::Mongo::ASCENDING]])
+					@coll.create_index([["s", ::Mongo::ASCENDING], ["o", ::Mongo::ASCENDING]])
+					@coll.create_index([["p", ::Mongo::ASCENDING], ["o", ::Mongo::ASCENDING]])
+				end
+				super(options, &block)
+			end
+
 			def find_word word
 				query([nil, RDF::RDFS.label, RDF::Literal.new(word, :language => "en-us")]).to_a
 			end
