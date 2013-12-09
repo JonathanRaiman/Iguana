@@ -1,3 +1,7 @@
+//***************************************************
+//***** This function capitalizes a string **********
+//***************************************************
+
 String.prototype.capitalize=function(){
 	var words = this.split(" ");
 	for (var i=0; i<words.length; i++){
@@ -6,8 +10,11 @@ String.prototype.capitalize=function(){
 	return words.join(" ");
 };
 
-$(document).ready(function() {
 
+$(document).ready(function() {
+	//*****************************************
+	//***** Listing Variables *****************
+	//*****************************************
 	var price                     = "$0 - $0",
 		mean_price                = 0.0,
 		item                      = {},
