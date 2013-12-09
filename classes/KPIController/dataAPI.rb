@@ -65,7 +65,8 @@ module Sinatra
 		end
 
 		def create_histogram_from_types
-			puts @types
+			puts "******"
+			puts @types.inspect
 			@hists = @listing_count.histogram :types => @types, :boxes => params[:boxes] ? params[:boxes].to_i : 10
 		end
 
