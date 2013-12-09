@@ -3,6 +3,7 @@ module RDF
 		# The Mongo repository can be extended to support wordsense specific queries we can optimize
 		class Repository < ::RDF::Repository
 
+			# monkey patching rdf/mongo again, because MongoHQ prefers to set its own indexes,...
 			def initialize(options = {}, &block)
 				options = {:host => 'localhost', :port => 27017, :db => 'quadb', :collection => 'quads'}.merge(options)
 				@db = ::Mongo::Connection.new(options[:host], options[:port]).db(options[:db])

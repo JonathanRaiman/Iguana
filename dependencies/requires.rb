@@ -30,7 +30,6 @@ gem 'json', :require => true
 # SPARQL queries,
 # and SPARQL endpoints
 class App
-	include(EtsyAnalytics)
 	include(EtsyParser)
 	helpers Sinatra::Autocomplete
 	helpers Sinatra::DataAPI
