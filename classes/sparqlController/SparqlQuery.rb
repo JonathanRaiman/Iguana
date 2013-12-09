@@ -11,6 +11,11 @@ module Sinatra
 			%w(xml json csv tsv html)
 		end
 
+		def handle_bad_sparql_query
+			store_message(t.bad_sparql_query)
+			redirect App::URLS[:sparql_form]
+		end
+
 		def format_sparql_response
 			case params["format"]
 			when *sparql_valid_formats
@@ -31,21 +36,23 @@ module Sinatra
 		end
 
 		def handle_sparql_query
-			if params["query"]
-				execute_sparql_query
-				format_sparql_response
-			else
-				return_service_description
+			begin
+				if params["query"]
+					execute_sparql_query
+					format_sparql_response
+				else
+					return_service_description
+				end
+			rescue QSPARQL::MalformedQuery
+				handle_bad_sparql_query
 			end
 		end
 
 		def default_sparql_query
-			<<-SPARQL
-SELECT *
+			"SELECT *
 WHERE {
-<http://purl.org/vocabularies/princeton/wn30/wordsense-chocolate-noun-1> ?p ?o
-}
-SPARQL
+<http://purl.org/vocabularies/princeton/wn30/wordsense-#{%w(bracelet coffee).sample}-noun-1> ?p ?o
+}"
 		end
 	end
 	helpers SparqlQuery

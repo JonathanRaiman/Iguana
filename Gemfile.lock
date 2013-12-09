@@ -161,6 +161,7 @@ GEM
     rdf-xsd (1.0.2.1)
       nokogiri (>= 1.5.0)
       rdf (>= 0.3.4)
+    redcarpet (3.0.0)
     ref (1.0.4)
     rspec (2.14.1)
       rspec-core (~> 2.14.0)
@@ -251,6 +252,7 @@ DEPENDENCIES
   rdf-mongo!
   rdf-raptor
   rdf-rdfa
+  redcarpet
   rspec
   sinatra
   sinatra-assetpack

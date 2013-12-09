@@ -14,3 +14,7 @@ footer: "Site designed and built by Jonathan Raiman and Mitchell Kates as part o
 write_query_here: "Write your SPARQL query here."
 ontology: "Ontology"
 back_to_product_search: "Back to product search"
+bad_sparql_query: |
+  **Error**
+  
+  Please check SPARQL query syntax and try again.

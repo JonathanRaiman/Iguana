@@ -66,6 +66,16 @@ class Category
 		pc
 	end
 
+	def self.convert_to_ld
+		pc = MongoMapperParallel.new(
+			:class => Category,
+			:split => :_id,
+			:args => [Category.collection_name, RDF::Iguana.to_s, RDF::RDFS.label.to_s],
+			:javascript => File.read(File.dirname(__FILE__)+"/../MongoCommands/CategoryToLD.js"))
+		pc.run
+		pc
+	end
+
 	ensure_index [[:"associated_synsets.name", 1]]
 
 end

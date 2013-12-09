@@ -31,3 +31,7 @@ class App < Sinatra::Base
 	end
 
 end
+
+module RDF
+	Iguana = RDF::Vocabulary.new("http://iguanaetsy.herokuapp.com/ontology/")
+end

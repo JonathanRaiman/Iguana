@@ -29,6 +29,7 @@ gem 'libv8'
 gem 'linkeddata'
 gem 'sparql'
 gem 'equivalent-xml'
+gem "redcarpet"
 
 # for rdf stuff:
 gem "rdf"
