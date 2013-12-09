@@ -46,6 +46,7 @@ $(document).ready(function() {
 		pricing_formatType_select = $("select[name='plotType']"),
 		tangle;
 
+	//Reformat into dollar values
 	Tangle.formats.preciseDollars = function (value) {
 		return "$" + value.toFixed(2);
 	};
@@ -80,7 +81,7 @@ $(document).ready(function() {
 	    },
 
 
-	    // hover
+	    // On Hover Action
 	    
 	    initializeHover: function () {
 	        this.isHovering = false;
@@ -113,7 +114,7 @@ $(document).ready(function() {
 	    },
 
 
-	    // help
+	    // On Help Action
 
 	    initializeHelp: function () {
 	        this.helpElement = (new Element("div", { "class": "TKAdjustableNumberHelp" })).inject(this.element, "top");
@@ -130,7 +131,7 @@ $(document).ready(function() {
 	    },
 
 
-	    // drag
+	    // On Drag Action
 	    
 	    initializeDrag: function () {
 	        this.isDragging = false;
@@ -161,7 +162,9 @@ $(document).ready(function() {
 	        this.helpElement.setStyle("display", touches.wasTap ? "block" : "none");
 	    }
 	};
-
+	
+	//Tangle Object
+	
 	tangle = new Tangle($(".summary_page")[0], {
 			initialize: function () {
 				this.price = 0.0;
@@ -171,7 +174,7 @@ $(document).ready(function() {
 				this.above_average_price = 0.0;
 			},
 			update: function () {
-				// inexact science:
+				// Visibility Calculations
 				this.above_average_price = this.price - mean_price;
 				this.visibility = Math.max(1,(600*Math.pow(2.7182818285, -(Math.abs(mean_price-this.price)/15)*0.3)).toFixed(2));
 			}
@@ -202,9 +205,9 @@ $(document).ready(function() {
 			error: cberror
 		});
 	}
-
+	
+	// Returns a 2D array with price and view as dimensions.
 	function get_price_view_scatter_plot(item_id, cb, cberror) {
-		// returns a 2D array with price and view as dimensions.
 		return make_api_request({
 			'request_type': 'price_view_scatter',
 			'_id': item_id,
@@ -213,6 +216,7 @@ $(document).ready(function() {
 		}, cb, cberror);
 	}
 
+	// Returns list of correlated categories
 	function get_correlated_categories(item_id, cb, cberror) {
 		return make_api_request({
 			'request_type':"category_stats",
@@ -220,6 +224,7 @@ $(document).ready(function() {
 		}, cb, cberror);
 	}
 
+	// Returns pricing information
 	function get_pricing_information(item_id, cb, cberror) {
 		return make_api_request({
 			'request_type':"price_stats",
@@ -230,6 +235,7 @@ $(document).ready(function() {
 		}, cb, cberror);
 	}
 
+	// Returns views information
 	function get_views_information(item_id, cb, cberror) {
 		return make_api_request({
 			'request_type':"view_stats",
@@ -238,6 +244,7 @@ $(document).ready(function() {
 		}, cb, cberror);
 	}
 
+	//Generates plots given a response object
 	function plotCategories (response) {
 		response.sort( function (a,b) {
 			return b.associated_synsets[0].prob*b.count-a.associated_synsets[0].prob*b.count;
@@ -410,8 +417,6 @@ $(document).ready(function() {
 	//****************************************
 	//** Type Ahead Functionality ************
 	//****************************************
-
-	// Typeahead preferences
 
 	(function () {
 
