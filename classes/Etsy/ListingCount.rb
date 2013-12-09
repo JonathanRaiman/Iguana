@@ -89,7 +89,9 @@ class Listing
 			opts[:types].each do |type|
 				hists[type["name"].to_sym] = Histogram.new(:boxes => opts[:boxes])
 			end
+			puts opts[:types].inspect
 			each_listing do |listing, shop|
+				puts "a listing"
 				puts listing
 				opts[:types].each do |type|
 					val = listing.send(type["name"].to_sym).to_f
