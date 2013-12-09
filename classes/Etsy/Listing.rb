@@ -53,7 +53,7 @@ class Listing
 	key :is_digital, Boolean, :default => false
 	key :has_variations, Boolean, :default => false
 	key :wordnet_words, Boolean, :default => false
-	key :expanded_tags, NamedVector, :default => NamedVector.to_mongo(NamedVector.new)
+	# key :expanded_tags, NamedVector, :default => NamedVector.to_mongo(NamedVector.new)
 end
 
 class Etsy::Listing
