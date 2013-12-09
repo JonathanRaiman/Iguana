@@ -1,3 +1,4 @@
+# all our static assets are referenced here for clarity.
 class App < Sinatra::Base
 	register Sinatra::StaticAssets
 	set :root, File.dirname(__FILE__)+"/../../"

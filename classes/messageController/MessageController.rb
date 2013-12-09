@@ -1,3 +1,5 @@
+# Error messages are passed around as markdown, and are converted to HTML when needed.
+# These messages are handled by this module.
 class App < Sinatra::Base
 
 	@@markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML, :autolink => true, :space_after_headers => true)

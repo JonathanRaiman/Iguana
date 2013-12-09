@@ -1,3 +1,4 @@
+# auth management using Warden. Fairly boilerplate code here.
 require 'warden'
 class App < Sinatra::Base
 

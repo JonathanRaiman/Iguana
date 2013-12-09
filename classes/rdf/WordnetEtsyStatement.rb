@@ -1,4 +1,5 @@
 module RDF
+	# Crossover between Wordnet RDF::Statement and Etsy listings for targeted hybrid queries
 	module WordnetEtsy
 		module Statement
 

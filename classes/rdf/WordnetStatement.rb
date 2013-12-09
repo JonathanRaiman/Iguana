@@ -1,5 +1,6 @@
 module RDF
 	module Wordnet
+		# Wordsense RDF:Statement mashup for more semantic methods (see specs for details)
 		module Statement
 			def similar
 				[] unless predicate == RDF::RDFS.label
@@ -21,7 +22,7 @@ module RDF
 
 			def find_wordsense
 				subject unless predicate != RDF::WN20.containsWordSense
-				App.rdf.find_wordsense(subject) || RDF::NilWordsense.new
+				App.rdf.find_wordsense(subject) || NilWordsense.new()
 			end
 
 			def find_words

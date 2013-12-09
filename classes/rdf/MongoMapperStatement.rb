@@ -1,3 +1,4 @@
+# Mongo Mapper model for RDF statements
 require 'mongo_mapper'
 class MongoMapperStatement
 	include MongoMapper::Document

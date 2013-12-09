@@ -1,3 +1,4 @@
+# our very own histogram class. We should release this as a gem probably.
 class Histogram
 	attr_reader :boxes
 	attr_reader :data

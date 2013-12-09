@@ -1,3 +1,5 @@
+# our RDF database needs to be hijacked from its original ( read crazy) configuration, to live in
+# the same place as our regular db.
 class RDF::Mongo::Repository;attr_accessor :db;end
 module Mongodb
 

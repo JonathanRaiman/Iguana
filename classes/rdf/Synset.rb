@@ -1,3 +1,4 @@
+# Synsets serve to do high level operations on our Wordnet tree (this is made clear in our specs)
 module Synset
 	def self.new(name, opts={})
 		pos   = opts[:pos]   || "noun"

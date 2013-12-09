@@ -1,3 +1,7 @@
+#  RDF/Mongo has a troublesome relation with Ruby Symbols,
+# we add in strings as cases to better support Mongo conversions and
+# transfers between our regular collections and their Linked Data
+# counterparts.
 class RDF::Mongo::Conversion
 	def self.from_mongo(value, value_type = :u, literal_extra = nil)
 		case value_type

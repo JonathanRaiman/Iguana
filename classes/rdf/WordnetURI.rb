@@ -1,5 +1,6 @@
 module RDF
 	module Wordnet
+		# Wordsense RDF:URI mashup for more semantic methods (see specs for details)
 		module URI
 			def similar
 				wordsense = App.rdf.find_wordsense(self)

@@ -1,5 +1,8 @@
 module Sinatra
+	# You could call this the mothership of modules
+	# this is where our histograms, data, and scatter plots are exposed.
 	module DataAPI
+		# we start small with this case statement that splits off the request types
 		def handle_data_api
 			case params[:request_type]
 			when "category_stats"
@@ -27,6 +30,7 @@ module Sinatra
 			end
 		end
 
+		# we then find more granular methods, this one gives us the correlated categories
 		def find_correlated_categories_and_return
 			categories = @listing_count.correlated_categories_score_only
 			categories.to_json
@@ -39,6 +43,8 @@ module Sinatra
 			}.to_json
 		end
 
+		# Histograms are generated on a per type basis, allowing us to group several types under a single request
+		# inside the same returned json.
 		def return_histograms
 			resp = {
 			category: params[:_id],
@@ -87,6 +93,7 @@ module Sinatra
 			end
 		end
 
+		# Since each type can have different min and max constraints, we convert them both here.
 		def create_type_from_request name
 			type = {"name" => name}
 			if !params["#{name}_min_value"].nil? then type.merge!({"min_value" => params["#{name}_min_value"].to_f}) end

@@ -1,4 +1,5 @@
 module RDF
+	# Crossover between Wordnet RDF::URI and Etsy listings for targeted hybrid queries
 	module WordnetEtsy
 		module URI
 

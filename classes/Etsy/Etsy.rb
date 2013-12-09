@@ -1,3 +1,4 @@
+# this is where we wire our database up to Heroku (MongoHQ) or to our localhost version.
 require 'mongo_mapper'
 require "etsy"
 require 'uri'

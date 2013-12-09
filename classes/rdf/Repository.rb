@@ -1,10 +1,12 @@
 module RDF
 	module Mongo
+		# The Mongo repository can be extended to support wordsense specific queries we can optimize
 		class Repository < ::RDF::Repository
 			def find_word word
 				query([nil, RDF::RDFS.label, RDF::Literal.new(word, :language => "en-us")]).to_a
 			end
 
+			# optimized for multiquery by using OR statement and disregarding non indexed fields
 			def find_words words
 				words.empty? ? [] : App.rdf_collection.find({
 					:"$or" => words.map {|i| {:o => i}},
@@ -13,6 +15,7 @@ module RDF
 				end
 			end
 
+			# optimized for multiquery by using OR statement and disregarding non indexed fields
 			def count_words words
 				words.empty? ? 0 : App.rdf_collection.find({
 					:"$or" => words.map {|i| {:o => i}},

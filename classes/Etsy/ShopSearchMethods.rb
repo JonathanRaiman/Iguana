@@ -1,3 +1,5 @@
+# All sorts of enumeration methods for dealing with listings, words, and shops
+# in large quantities (=> read Streaming methods).
 module ShopSearchMethods
 
 	def each_listing_with_tags tags

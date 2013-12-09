@@ -1,3 +1,4 @@
+# Autocomplete routes and functionality is specified here in a true MVC fashion as Jaya would say
 require 'sinatra/base'
 module Sinatra
 

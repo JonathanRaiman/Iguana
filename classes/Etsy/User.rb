@@ -99,6 +99,7 @@ class Etsy::User
 				:shop_id => @shop_id
 			)
 		rescue NoMethodError
+			# fairly rare at this point.
 			puts "associated_profile bug"
 		end
 	end

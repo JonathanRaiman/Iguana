@@ -1,3 +1,5 @@
+# wordnet status is a stored field for knowing if a listing, category, or shop has a wordnet counterpart
+# this saves us existence checks for LDV connections.
 module ListingWordnetSearch
 	module ClassMethods
 	end

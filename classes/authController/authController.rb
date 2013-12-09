@@ -1,3 +1,4 @@
+# OAuth login in and out, again rather boilerplate.
 class App < Sinatra::Base
 	get App::URLS[:auth_failure] do
 		redirect App::URLS[:main]

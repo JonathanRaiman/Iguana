@@ -78,8 +78,6 @@ function (start, end, _args) {
 
 		var wn_name = findWordnetName(category._id);
 
-		print(wn_name ? wn_name.s : ("not found for "+category._id));
-
 		if (wn_name) {
 
 			createFloatLD(wn_name.s, "hasVolume", category.total_inventory_value);
