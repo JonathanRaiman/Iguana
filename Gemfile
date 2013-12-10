@@ -30,6 +30,8 @@ gem 'linkeddata'
 gem 'sparql'
 gem 'equivalent-xml'
 gem "redcarpet"
+gem 'dalli'
+gem 'memcachier', :group => :production
 
 # for rdf stuff:
 gem "rdf"

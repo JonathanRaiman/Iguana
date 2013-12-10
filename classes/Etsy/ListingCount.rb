@@ -55,6 +55,10 @@ class Listing
 			cc
 		end
 
+		def correlated_categories_score_only_cache; "#{_id}_cc_score_only"              ;end
+		def handle_view_stats_cache(max,min);       "#{_id}_view_stats#{max}-#{min}"    ;end
+		def handle_price_stats_cache(max,min);      "#{_id}_price_stats#{max}-#{min}"   ;end
+
 		def each_listing
 			Shop.each_listings_with_words(words) do |listing, shop|
 				yield(listing,shop)
@@ -89,10 +93,7 @@ class Listing
 			opts[:types].each do |type|
 				hists[type["name"].to_sym] = Histogram.new(:boxes => opts[:boxes])
 			end
-			puts opts[:types].inspect
 			each_listing do |listing, shop|
-				puts "a listing"
-				puts listing
 				opts[:types].each do |type|
 					val = listing.send(type["name"].to_sym).to_f
 					if (!type["min_value"].nil? and val > type["min_value"]) or !type["min_value"]

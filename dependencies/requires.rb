@@ -1,12 +1,13 @@
 # coding: utf-8
 # Load some rubygems:
 gem 'json', :require => true
-%w(yaml box_puts thin omniauth omniauth-etsy jraiman_progressbar rdf rdf/mongo rdf/raptor rdf/rdfa ostruct named_vector parallel mongo_mapper_parallel linkeddata sparql sinatra/sparql equivalent-xml redcarpet).map {|d| require(d)}
+%w(yaml box_puts thin omniauth omniauth-etsy jraiman_progressbar rdf rdf/mongo rdf/raptor rdf/rdfa ostruct named_vector parallel mongo_mapper_parallel linkeddata sparql sinatra/sparql equivalent-xml redcarpet dalli memcachier).map {|d| require(d)}
 
 # then load some classes in order of dependency:
 [
 	'../classes/sinatra',
 	'../classes/messageController/MessageController',
+	'../classes/cacheController/Cache',
 	'../classes/databaseController/Mongodb',
 	'../classes/databaseController/DatabaseConfiguration',
 	'../classes/rdf/configuration',
@@ -34,6 +35,7 @@ class App
 	helpers Sinatra::Autocomplete
 	helpers Sinatra::DataAPI
 	helpers Sinatra::SparqlQuery
+	helpers Sinatra::Cache
 	register Sinatra::SPARQL
 end
 # Shops are also modular (their search behavior is separated out)

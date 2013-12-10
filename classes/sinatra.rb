@@ -36,5 +36,6 @@ class App < Sinatra::Base
 	use OmniAuth::Builder do
 		provider :etsy, CONFIG["etsy"]["key"], CONFIG["etsy"]["secret"], :scope => 'email_r,profile_r,listings_r'
 	end
+	set :cache, dc = Dalli::Client.new
 
 end

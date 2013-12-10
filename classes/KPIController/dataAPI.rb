@@ -32,8 +32,10 @@ module Sinatra
 
 		# we then find more granular methods, this one gives us the correlated categories
 		def find_correlated_categories_and_return
-			categories = @listing_count.correlated_categories_score_only
-			categories.to_json
+			fetch(@listing_count.correlated_categories_score_only_cache) do
+				categories = @listing_count.correlated_categories_score_only
+				categories.to_json
+			end
 		end
 
 		def return_scatter_plot
@@ -83,11 +85,17 @@ module Sinatra
 			end
 		end
 
+		def types_current_min_max
+			[@types.first["min_value"] ? @types.first["min_value"] : 0, @types.first["max_value"] ? @types.first["max_value"] : Float::INFINITY]
+		end
+
 		def handle_view_stats
 			if find_ListingCount
 				@types = [create_type_from_request("views")]
-				create_histogram_from_types
-				return_histograms
+				fetch(@listing_count.handle_view_stats_cache(*types_current_min_max)) do
+					create_histogram_from_types
+					return_histograms
+				end
 			else
 				handle_bad_request
 			end
@@ -104,8 +112,10 @@ module Sinatra
 		def handle_price_stats
 			if find_ListingCount
 				@types = [create_type_from_request("price")]
-				create_histogram_from_types
-				return_histograms
+				fetch(@listing_count.handle_price_stats_cache(*types_current_min_max)) do
+					create_histogram_from_types
+					return_histograms
+				end
 			else
 				handle_bad_request
 			end
