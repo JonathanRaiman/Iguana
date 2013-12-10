@@ -2,14 +2,11 @@ Iguana
 ======
 *Linked Data Ventures Final Group Project*
 
+See it running at [Iguana](http://iguanaetsy.herokuapp.com).
 
 **collaborators**
-*    Michael Phox,
 *    Mitch Kates,
 *    Jonathan Raiman
-
-
-
 
 Installation
 ------------
@@ -19,6 +16,8 @@ Installation
 	Recommended to do the following:
 	
 			brew install mongodb
+
+			brew install memcache
 
 	Then get cracking:
 
@@ -47,6 +46,10 @@ for Capybara and route testing do:
 
     rspec specs/pageTest.rb
 
+for everything else use Visa/Mastercard. Just kidding, do this:
+	
+	rake test
+
 Issues
 ------
-???
+None to report at this data.
