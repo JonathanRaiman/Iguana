@@ -7,7 +7,7 @@ class App < Sinatra::Base
 		erb :"rdf/_form"
 	end
 
-	get URLS[:ontology] do
+	route :get, ([URLS[:ontology]] + %w(hasMeanPrice hasVolume hasMeanGross hasMeanViews hasVisibilityProbability hasVisibilityProportion hasAssociatedSynset).map {|i| "/ontology/"+i}) do
 		erb :"rdf/_ontology"
 	end
 end
